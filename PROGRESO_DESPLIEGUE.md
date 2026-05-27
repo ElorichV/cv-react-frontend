@@ -43,7 +43,7 @@ cv-react-frontend/
 ├── src/
 │   ├── components/
 │   │   ├── Header.tsx
-│   │   ├── About.tsx
+│   │   ├── Profile.tsx
 │   │   ├── Experience.tsx
 │   │   ├── Education.tsx
 │   │   ├── Skills.tsx
@@ -153,7 +153,7 @@ aws s3 sync dist/assets/ s3://axel-cv-frontend/assets/ --cache-control "max-age=
 
 ### Componentes Principales
 - **Header**: Navegación y información personal
-- **About**: Descripción profesional y foto
+- **Profile**: Descripción profesional y foto
 - **Experience**: Historial laboral dinámico
 - **Education**: Formación académica
 - **Skills**: Habilidades técnicas con barras de progreso

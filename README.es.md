@@ -81,7 +81,7 @@ El proyecto se refactorizó de un monolito a una arquitectura de componentes mod
 - **App.tsx**: Componente principal que gestiona el estado global, consume la API y orquesta todos los módulos.
 - **components/**: Carpeta con componentes especializados:
   - `Header.tsx`: Información personal y enlaces sociales
-  - `About.tsx`: Resumen profesional
+  - `Profile.tsx`: Resumen profesional
   - `Experience.tsx`: Historial laboral
   - `Projects.tsx`: Portafolio de proyectos
   - `Skills.tsx`: Habilidades técnicas organizadas por categorías

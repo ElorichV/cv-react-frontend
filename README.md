@@ -83,7 +83,7 @@ The project was refactored from a monolith to a modular component architecture:
 - **App.tsx**: Main component that manages global state, consumes the API and orchestrates all modules.
 - **components/**: Folder with specialized components:
   - `Header.tsx`: Personal information and social links
-  - `About.tsx`: Professional summary
+  - `Profile.tsx`: Professional summary
   - `Experience.tsx`: Work history
   - `Projects.tsx`: Project portfolio
   - `Skills.tsx`: Technical skills organized by categories
