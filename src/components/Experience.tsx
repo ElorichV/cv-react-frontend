@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, ChevronRight } from 'lucide-react';
+import { Briefcase, Calendar, ChevronRight, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export interface WorkExperience {
@@ -9,15 +9,33 @@ export interface WorkExperience {
     company: string;
     dates: string;
     responsibilities: string[];
+    companyUrl?: string;
 }
 
 interface ExperienceProps {
     experiences: WorkExperience[];
 }
 
-const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
-    // 🛠️ LA SOLUCIÓN: El hook debe ir aquí arriba, en la zona de lógica, antes del return.
+const Experience: React.FC<ExperienceProps> = ({ experiences = [] }) => {
     const { t } = useTranslation();
+
+    const positronicaExp: WorkExperience = {
+        id: -1,
+        jobTitle: t('exp_positronica_role', 'Full-Stack Software Engineer & QA Lead'),
+        company: 'Positronica Labs',
+        dates: t('exp_positronica_dates', 'Enero 2026 - Presente'),
+        companyUrl: 'https://positronicalabs.dev/team',
+        responsibilities: [
+            t('exp_positronica_resp1', 'Desarrollo y mantenimiento de arquitectura de software en backends .NET, servicios cloud y frontend.'),
+            t('exp_positronica_resp2', 'Liderazgo de calidad y diseño de suites automatizadas E2E con Playwright y C#/.NET.'),
+            t('exp_positronica_resp3', 'Implementación de validaciones y checks de release previos a despliegues a producción en sistemas de IA agéntica.')
+        ]
+    };
+
+    const allExperiences = [
+        positronicaExp,
+        ...experiences.filter(exp => !exp.company.toLowerCase().includes('positronica'))
+    ];
 
     return (
         <section id="experiencia" className="py-24 relative">
@@ -33,7 +51,7 @@ const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
                 </div>
 
                 <div className="relative border-l-2 border-slate-800 ml-4 md:ml-6 space-y-12">
-                    {experiences.map((exp, index) => (
+                    {allExperiences.map((exp, index) => (
                         <motion.div
                             key={exp.id}
                             initial={{ opacity: 0, x: -20 }}
@@ -52,7 +70,19 @@ const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
                                         </h3>
                                         <div className="flex items-center gap-2 text-slate-400 font-medium mt-1">
                                             <Briefcase size={16} className="text-red-500" />
-                                            <span>{exp.company}</span>
+                                            {exp.companyUrl ? (
+                                                <a
+                                                    href={exp.companyUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="hover:text-red-400 transition-colors inline-flex items-center gap-1.5 group/link"
+                                                >
+                                                    <span className="font-semibold text-white group-hover/link:text-red-400">{exp.company}</span>
+                                                    <ExternalLink size={14} className="text-red-500 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                                                </a>
+                                            ) : (
+                                                <span>{exp.company}</span>
+                                            )}
                                         </div>
                                     </div>
 
@@ -70,6 +100,22 @@ const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
                                         </li>
                                     ))}
                                 </ul>
+
+                                {exp.companyUrl && (
+                                    <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+                                        <a
+                                            href={exp.companyUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 text-red-500 font-mono text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                                        >
+                                            {t('exp_positronica_link', '[ Conoce_al_Equipo ] ↗')}
+                                        </a>
+                                        <span className="px-2.5 py-0.5 bg-red-500/10 border border-red-500/30 rounded-full text-[10px] font-mono text-red-400 uppercase tracking-wider">
+                                            Applied AI Lab
+                                        </span>
+                                    </div>
+                                )}
                             </div>
                         </motion.div>
                     ))}
@@ -80,4 +126,4 @@ const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
     );
 };
 
-export default Experience;;
+export default Experience;

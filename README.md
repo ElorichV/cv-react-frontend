@@ -1,97 +1,109 @@
-# 💻 CV React Frontend
-*A modern, serverless Single Page Application showcasing a dynamic portfolio.*
+# ⚛️ Axel Linares - Portfolio Frontend (React + Vite SPA)
 
-🌍 **[Read in English](#english-version)** | 🌎 **[Leer en Español](#versión-en-español)**
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Bundler-Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![AWS](https://img.shields.io/badge/Cloud-S3_%2B_CloudFront-232F3E?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)
+
+*High-performance, modern Single Page Application (SPA) designed as an interactive, ATS-compliant bilingual portfolio. Built with modern React patterns, strict TypeScript typing, Tailwind CSS, and seamless integration with the .NET 8 Web API backend.*
+
+---
+
+🌍 **[English](#-english-version)** | 🌎 **[Español](#-versión-en-español)**
 
 ---
 
 <a id="english-version"></a>
 ## 🇺🇸 English Version
 
-### 📌 Overview
-This Single Page Application (SPA) serves as a dynamic, bilingual professional portfolio. It consumes a remote .NET 8 API to render profile data, work experience, and projects. The project utilizes a modern Serverless architecture, optimized for performance, security, and global delivery via AWS.
+### 📌 System Overview & Architecture
 
-### 🛠️ Tech Stack
-* **Core**: React 18+, TypeScript, Vite
-* **Styling**: Tailwind CSS, React Icons (Glassmorphism UI)
-* **Communication**: Axios (HTTP Client)
-* **Infrastructure**: AWS S3 (Static Origin) + AWS CloudFront (CDN, SSL, Reverse Proxy)
+This Single Page Application (SPA) acts as the interactive presentation layer of a decoupled fullstack platform. Engineered with **React 18**, **TypeScript**, and **Vite**, it consumes a secure [.NET 8 Web API backend](https://github.com/ElorichV/AxelLinaresApi) to dynamically render candidate profiles, impact metrics, technical certifications, and featured software engineering projects.
 
-### 🏗️ Cloud Deployment Architecture
-The deployment utilizes a Serverless Frontend approach to eliminate Mixed Content errors and optimize delivery:
-1. **AWS S3**: Acts as the origin server for static compiled assets (`/dist`).
-2. **AWS CloudFront**: Provides the SSL/TLS layer and acts as a reverse proxy.
-    * `/*` traffic is routed to S3.
-    * `/api/*` traffic is securely proxied to the .NET Elastic Beanstalk backend.
+```mermaid
+flowchart LR
+    User(["Client Browser"])
+    CF["AWS CloudFront\n(CDN / Edge SSL / Routing)"]
+    S3[("AWS S3 Bucket\n(Compiled Assets /dist)")]
+    Backend[(".NET 8 Web API\n(Elastic Beanstalk)")]
 
-### 🚀 Local Setup & Development
+    User -->|HTTPS :443| CF
+    CF -->|Static Assets /*| S3
+    CF -->|API Calls /api/*| Backend
+```
 
-**1. Install dependencies:**
+---
+
+### 🏛️ Engineering & Frontend Highlights (Semi-Senior Level)
+
+1. **Modular Component Architecture & Clean Code:**
+   * Divided into isolated, reusable presentational and container components following atomic design principles.
+   * Type-safe props and data contracts matching backend DTO models (`UserProfile`, `Experience`, `Project`, `Certification`).
+2. **Resilient HTTP Client & RFC 7807 Error Handling:**
+   * Configured **Axios** with centralized interceptors, handling timeouts, network fallbacks, and standard RFC 7807 `ProblemDetails` validation messages from the .NET backend.
+3. **Optimized Build & Performance:**
+   * Powered by **Vite** for fast HMR (Hot Module Replacement) and optimized production tree-shaking.
+   * Zero render-blocking assets and responsive layout adopting Mobile-First styling with Tailwind CSS.
+4. **Cloud-Native Serverless Hosting:**
+   * Static asset delivery via **AWS S3** cached globally using **AWS CloudFront** edge locations, eliminating mixed-content issues and ensuring sub-second response times.
+
+---
+
+### 🚀 Getting Started & Local Development
+
+#### Prerequisites
+* [Node.js](https://nodejs.org/) (v18.x or v20.x LTS)
+* [npm](https://www.npmjs.com/) or [pnpm](https://pnpm.io/)
+
+#### Setup
 ```bash
+# 1. Clone repository
+git clone https://github.com/ElorichV/cv-react-frontend.git
+cd cv-react-frontend
+
+# 2. Install dependencies
 npm install
-```
 
-**2. Environment Configuration:**
-Create a `.env` file in the root directory to define your API endpoint:
-```env
-VITE_API_URL=https://localhost:7081/api
-```
+# 3. Configure environment
+# Create .env file:
+# VITE_API_URL=http://localhost:5139/api
 
-**3. Start the development server:**
-```bash
+# 4. Start local development server
 npm run dev
-```
 
-**4. Build for Production:**
-```bash
+# 5. Build for production
 npm run build
 ```
-*Upload the contents of the generated `/dist` folder to your S3 bucket and invalidate the CloudFront cache.*
 
 ---
 
 <a id="versión-en-español"></a>
 ## 🇲🇽 Versión en Español
 
-### 📌 Descripción General
-Esta Single Page Application (SPA) funciona como un portafolio profesional dinámico y bilingüe. Consume una API remota en .NET 8 para renderizar datos del perfil, experiencia laboral y proyectos. El proyecto utiliza una arquitectura Serverless moderna, optimizada para rendimiento, seguridad y entrega global a través de AWS.
+### 📌 Resumen del Sistema y Arquitectura
 
-### 🛠️ Stack Tecnológico
-* **Core**: React 18+, TypeScript, Vite
-* **Estilizado**: Tailwind CSS, React Icons (Interfaz Glassmorphism)
-* **Comunicación**: Axios (Cliente HTTP)
-* **Infraestructura**: AWS S3 (Origen Estático) + AWS CloudFront (CDN, SSL, Proxy Inverso)
-
-### 🏗️ ArquArquitectura de Despliegue en la Nube
-El despliegue utiliza un enfoque Frontend Serverless para eliminar errores de contenido mixto (Mixed Content) y optimizar la entrega:
-1. **AWS S3**: Actúa como el servidor de origen para los archivos estáticos compilados (`/dist`).
-2. **AWS CloudFront**: Proporciona la capa SSL/TLS y actúa como proxy inverso.
-    * El tráfico `/*` se dirige a S3.
-    * El tráfico `/api/*` se redirige de forma segura al backend de .NET en Elastic Beanstalk.
-
-### 🚀 Configuración y Desarrollo Local
-
-**1. Instalar dependencias:**
-```bash
-npm install
-```
-
-**2. Configuración de Entorno:**
-Crea un archivo `.env` en la raíz del proyecto para definir tu endpoint local:
-```env
-VITE_API_URL=https://localhost:7081/api
-```
-
-**3. Iniciar el servidor de desarrollo:**
-```bash
-npm run dev
-```
-
-**4. Compilar para Producción:**
-```bash
-npm run build
-```
-*Sube el contenido de la carpeta `/dist` generada a tu bucket de S3 e invalida el caché de CloudFront.*
+Esta aplicación de página única (SPA) funciona como la capa de presentación interactiva de una plataforma full-stack desacoplada. Construida con **React 18**, **TypeScript** y **Vite**, consume un [backend seguro en .NET 8 Web API](https://github.com/ElorichV/AxelLinaresApi) para renderizar dinámicamente perfiles profesionales, métricas de impacto laboral, certificaciones técnicas y proyectos de software reales.
 
 ---
-*Developed by Axel A. Linares - Software Engineer | .NET Backend & QA Automation*
+
+### 🏛️ Aspectos Técnicos Destacados (Nivel Semi-Senior)
+
+1. **Diseño Modular y Tipado Estricto:**
+   * Componentes desacoplados, altamente reutilizables y accesibles.
+   * Modelos e interfaces en TypeScript estrictamente sincronizados con los contratos de la API en .NET.
+2. **Cliente HTTP Resiliente y Manejo de Errores RFC 7807:**
+   * Consumo optimizado con **Axios**, interceptando y mostrando de forma amigable los errores de validación tipados y límites de rate limiting enviados por el backend.
+3. **Rendimiento y Optimización Web:**
+   * Bundling de alto rendimiento con **Vite**, code-splitting y diseño responsivo enfocado en Mobile-First con **Tailwind CSS**.
+4. **Arquitectura Cloud Serverless:**
+   * Despliegue estático sobre **AWS S3** respaldado por **AWS CloudFront (CDN)** como proxy inverso para enrutar el tráfico `/api/*` hacia el backend en Elastic Beanstalk con cifrado SSL/TLS.
+
+---
+
+### 👨‍💻 Autor & Contacto
+* **Desarrollado por:** Axel Alberto Linares Lorrabaquio
+* **Rol:** Full-Stack Software Engineer (.NET Backend & QA Automation)
+* **LinkedIn:** [Axel Linares](https://www.linkedin.com/in/axel-alberto-linares-lorrabaquio-69a6b31b0)
+* **GitHub:** [@ElorichV](https://github.com/ElorichV)
+* **Laboratorio:** [Positronica Labs](https://positronicalabs.dev/team)

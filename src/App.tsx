@@ -19,6 +19,7 @@ export interface WorkExperience {
     company: string;
     dates: string;
     responsibilities: string[];
+    companyUrl?: string;
 }
 
 export interface Project {
@@ -114,9 +115,7 @@ function App() {
                 }} />
                 <main className="container mx-auto max-w-6xl min-h-screen">
                     <Profile />
-                    {profile.experiences && profile.experiences.length > 0 && (
-                        <Experience experiences={profile.experiences} />
-                    )}
+                    <Experience experiences={profile.experiences || []} />
                     <Skills hardSkills={profile.hardSkills} softSkills={profile.softSkills} />
                     <Projects />
                     <Education certifications={profile.certifications} />

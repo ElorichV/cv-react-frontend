@@ -1,4 +1,4 @@
-﻿import i18n from 'i18next';
+import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 const resources = {
@@ -13,10 +13,10 @@ const resources = {
             "projects_view_code": "[ Ver_Código ] ↗",
 
             "proj1_title": "Sistema de Gestión de Panaderías",
-            "proj1_desc": "Ecosistema Full-Stack desarrollado para validar y estresar un modelo relacional de base de datos SQL. Implementación de backend en C#/.NET con índices optimizados. Impacto: Reducción del tiempo de procesamiento de pedidos en un 30% y garantía de integridad referencial absoluta.",
+            "proj1_desc": "Ecosistema Full-Stack desarrollado bajo principios de Clean Architecture en .NET 8 y C#, enfocado en el control de stock transaccional y optimización de base de datos SQL Server. Impacto: Reducción del tiempo de procesamiento de pedidos en un 30% y garantía de integridad referencial absoluta.",
 
             "proj2_title": "QA Automation Suite",
-            "proj2_desc": "Framework de pruebas automatizadas E2E diseñado con Playwright y TypeScript. Enfocado en la validación de flujos críticos de usuario. Impacto: Reducción de la deuda técnica en un 20% y aumento significativo en la cobertura de pruebas en entornos CI/CD.",
+            "proj2_desc": "Framework de pruebas E2E desarrollado en C#/.NET 8 con Playwright y NUnit, implementado para validar flujos empresariales durante mi servicio en Sección Amarilla. Impacto: Reducción de la deuda técnica en un 20% y aumento significativo en la cobertura de pruebas en entornos CI/CD.",
 
             "proj3_title": "Axel Linares API Core",
             "proj3_desc": "Backend empresarial desarrollado en .NET 8 / C# que sirve como el motor centralizado de datos. Diseñado bajo patrones de Arquitectura Limpia, inyección de dependencias y optimizado para despliegues serverless de alta disponibilidad en AWS.",
@@ -35,7 +35,15 @@ const resources = {
             "pilar3_title": "Escalabilidad",
             "pilar3_desc": "Backend diseñado para la nube. Arquitecturas .NET preparadas para el ecosistema AWS.",
 
+            "exp_section": "> Registro_Laboral_",
             "exp_heading": "Experiencia en Combate",
+            "exp_positronica_role": "Full-Stack Software Engineer & QA Lead",
+            "exp_positronica_dates": "Enero 2026 - Presente",
+            "exp_positronica_resp1": "Desarrollo y mantenimiento de arquitectura de software en backends .NET, servicios cloud y frontend.",
+            "exp_positronica_resp2": "Liderazgo de calidad y diseño de suites automatizadas E2E con Playwright y C#/.NET.",
+            "exp_positronica_resp3": "Implementación de validaciones y checks de release previos a despliegues a producción en sistemas de IA agéntica.",
+            "exp_positronica_link": "[ Conoce_al_Equipo ] ↗",
+
             "edu_section": "> Base_de_Conocimiento_",
             "edu_heading": "Certificaciones y Entrenamiento",
             "edu_verify": "[ Validar_Credencial ] ↗",
@@ -69,10 +77,10 @@ const resources = {
             "projects_view_code": "[ View_Code ] ↗",
 
             "proj1_title": "Bakery Management System",
-            "proj1_desc": "Full-Stack ecosystem engineered to validate and stress-test a complex SQL relational database model. Developed C#/.NET backend with optimized indexes. Impact: Reduced order processing time by 30% while ensuring absolute referential integrity.",
+            "proj1_desc": "Full-Stack ecosystem architected under Clean Architecture principles in .NET 8 and C#, focused on transactional inventory control and SQL Server database optimization. Impact: Reduced order processing time by 30% while ensuring absolute referential integrity.",
 
             "proj2_title": "QA Automation Suite",
-            "proj2_desc": "End-to-End (E2E) automated testing framework engineered with Playwright and TypeScript. Focused on critical user workflow validation. Impact: Reduced technical debt by 20% and significantly increased test coverage in CI/CD pipelines.",
+            "proj2_desc": "End-to-End (E2E) automated testing framework developed in C#/.NET 8 with Playwright and NUnit, implemented to validate enterprise workflows during my service at Sección Amarilla. Impact: Reduced technical debt by 20% and significantly increased test coverage in CI/CD pipelines.",
 
             "proj3_title": "Axel Linares API Core",
             "proj3_desc": "Enterprise-grade backend developed in .NET 8 / C# serving as the centralized data engine. Architected under Clean Architecture principles, dependency injection, and optimized for high-availability AWS cloud environments.",
@@ -91,7 +99,15 @@ const resources = {
             "pilar3_title": "Scalability",
             "pilar3_desc": "Backend designed for the cloud. .NET architectures ready for the AWS ecosystem.",
 
+            "exp_section": "> Work_Registry_",
             "exp_heading": "Combat Experience",
+            "exp_positronica_role": "Full-Stack Software Engineer & QA Lead",
+            "exp_positronica_dates": "January 2026 - Present",
+            "exp_positronica_resp1": "Engineered software architectures across .NET backends, cloud infrastructure, and modern frontend interfaces.",
+            "exp_positronica_resp2": "Led quality assurance and engineered End-to-End (E2E) test automation suites with Playwright and C#/.NET.",
+            "exp_positronica_resp3": "Established release checks and pre-deployment validation workflows for applied agentic AI systems.",
+            "exp_positronica_link": "[ View_Team ] ↗",
+
             "edu_section": "> Knowledge_Base_",
             "edu_heading": "Certifications & Training",
             "edu_verify": "[ Verify_Credential ] ↗",

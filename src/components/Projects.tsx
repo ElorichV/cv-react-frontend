@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Database, ShieldCheck, Cpu, Layout } from 'lucide-react';
+
 const Projects: React.FC = () => {
     const { t } = useTranslation();
 
@@ -10,7 +11,7 @@ const Projects: React.FC = () => {
             id: 1,
             title: t('proj1_title'),
             desc: t('proj1_desc'),
-            tech: ['.NET', 'SQL Server', 'C#'],
+            tech: ['.NET 8', 'C#', 'SQL Server', 'Clean Architecture'],
             link: 'https://github.com/ElorichV/Sistema-de-gestion-para-panaderias',
             icon: <Database className="w-6 h-6" />,
             image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop'
@@ -19,7 +20,7 @@ const Projects: React.FC = () => {
             id: 2,
             title: t('proj2_title'),
             desc: t('proj2_desc'),
-            tech: ['Playwright', 'TypeScript', 'E2E'],
+            tech: ['.NET 8', 'C#', 'Playwright', 'NUnit', 'E2E'],
             link: 'https://github.com/ElorichV/Playwrigth_Demo',
             icon: <ShieldCheck className="w-6 h-6" />,
             image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop'
@@ -28,7 +29,7 @@ const Projects: React.FC = () => {
             id: 3,
             title: t('proj3_title'),
             desc: t('proj3_desc'),
-            tech: ['.NET 8', 'AWS', 'C#'],
+            tech: ['.NET 8', 'C#', 'ASP.NET Core', 'AWS'],
             link: 'https://github.com/ElorichV/AxelLinaresApi',
             icon: <Cpu className="w-6 h-6" />,
             image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=800&auto=format&fit=crop'
@@ -37,7 +38,7 @@ const Projects: React.FC = () => {
             id: 4,
             title: t('proj4_title'),
             desc: t('proj4_desc'),
-            tech: ['React', 'TypeScript', 'i18n'],
+            tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
             link: 'https://github.com/ElorichV/cv-react-frontend',
             icon: <Layout className="w-6 h-6" />,
             image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop'
@@ -87,8 +88,8 @@ const Projects: React.FC = () => {
                                 <div className="flex flex-wrap gap-2 mb-6">
                                     {project.tech.map((tech, idx) => (
                                         <span key={idx} className="px-3 py-1 bg-slate-800/80 border border-slate-700 rounded-full text-[10px] font-mono text-slate-400 uppercase tracking-wider">
-                      {tech}
-                    </span>
+                                            {tech}
+                                        </span>
                                     ))}
                                 </div>
                                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-red-400 transition-colors">
