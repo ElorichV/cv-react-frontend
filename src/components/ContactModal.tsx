@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -26,7 +26,12 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         setStatus('loading');
 
         try {
-            const response = await fetch('http://localhost:5139/api/email/send', {
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const emailApiUrl = isLocal
+                ? 'http://localhost:5139/api/email/send'
+                : 'https://d1xk37jjpjmwph.cloudfront.net/api/email/send';
+
+            const response = await fetch(emailApiUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

@@ -26,7 +26,11 @@ export interface Project {
     id: number;
     title: string;
     description: string;
-    projectUrl?: string;
+    projectUrl?: string | null;
+    category?: string;
+    badge?: string;
+    techStack?: string[];
+    architectureNotes?: string[];
 }
 
 export interface Certification {
@@ -66,11 +70,11 @@ function App() {
         setLoading(true); // Activa la micro-carga al cambiar de idioma
 
         // =========================================================
-        // 🛑 ENTORNO LOCAL
-         //const baseUrl = 'http://localhost:5139/api/Profile';
-
-        // 🟢 ENTORNO AWS PRODUCTION
-        const baseUrl = 'https://d1xk37jjpjmwph.cloudfront.net/api/Profile';
+        // Detección automática de entorno (Localhost vs Producción AWS)
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const baseUrl = isLocal
+            ? 'http://localhost:5139/api/Profile'
+            : 'https://d1xk37jjpjmwph.cloudfront.net/api/Profile';
         // =========================================================
 
         // 3. INYECTA EL IDIOMA ACTUAL EN LA URL DE LA PETICIÓN
@@ -114,10 +118,10 @@ function App() {
                     gitHubUrl: profile.gitHubUrl
                 }} />
                 <main className="container mx-auto max-w-6xl min-h-screen">
-                    <Profile />
+                    <Profile summary={profile.summary} />
                     <Experience experiences={profile.experiences || []} />
                     <Skills hardSkills={profile.hardSkills} softSkills={profile.softSkills} />
-                    <Projects />
+                    <Projects projects={profile.projects} />
                     <Education certifications={profile.certifications} />
                     <Hobbies />
                 </main>

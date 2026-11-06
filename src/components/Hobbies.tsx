@@ -19,7 +19,7 @@ const Hobbies: React.FC = () => {
             name: "Poke D&D",
             desc: t('hobby_pokednd', 'Dev Project & RPG'),
             icon: <Dices size={16} />,
-            link: "https://tudominio.com/pokednd",
+            link: "https://pokedyd.online/",
             image: "/D20.webp"
         },
         {

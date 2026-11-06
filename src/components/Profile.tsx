@@ -3,8 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Shield, Target, Zap } from 'lucide-react';
 
-const Profile: React.FC = () => {
+interface ProfileProps {
+    summary?: string;
+}
+
+const Profile: React.FC<ProfileProps> = ({ summary }) => {
     const { t } = useTranslation();
+    const bioText = summary || t('profile_bio');
 
     return (
         <section id="sobre-mi" className="py-24 relative overflow-hidden">
@@ -24,9 +29,9 @@ const Profile: React.FC = () => {
                             <div className="absolute inset-0 border border-red-500/30 rounded-3xl -rotate-3"></div>
                             <div className="relative w-full h-full bg-slate-800 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl">
                                 <img
-                                    src="https://placehold.co/600x600/0f172a/dc2626?text=AXEL+LINARES"
+                                    src="/axel-profile.jpg"
                                     alt="Axel Linares"
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover object-[center_20%]"
                                 />
                             </div>
                         </div>
@@ -41,7 +46,7 @@ const Profile: React.FC = () => {
                                 {t('profile_heading')}
                             </h2>
                             <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
-                                {t('profile_bio')}
+                                {bioText}
                             </p>
                         </div>
 
