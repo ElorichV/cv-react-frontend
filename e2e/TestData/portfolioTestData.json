@@ -1,0 +1,80 @@
+{
+  "categories": [
+    { "tabEs": "Todos", "tabEn": "All", "expectedCount": 3 },
+    { "tabEs": "AI Hackathons & Agentes", "tabEn": "AI Hackathons & Agents", "expectedCount": 1 },
+    { "tabEs": "Backend & Cloud (.NET)", "tabEn": "Backend & Cloud (.NET)", "expectedCount": 1 },
+    { "tabEs": "QA Automation & DSA", "tabEn": "QA Automation & DSA", "expectedCount": 1 }
+  ],
+  "hobbies": {
+    "expectedAnimeBadges": [
+      "Code Geass",
+      "Tengen Toppa Gurren Lagann",
+      "Mobile Suit Gundam",
+      "Mazinger Z"
+    ],
+    "pokeDndUrl": "https://pokedyd.online/"
+  },
+  "mockProfileEs": {
+    "id": 1,
+    "name": "AXEL ALBERTO LINARES LORRABAQUIO",
+    "title": "Software Engineer | Backend (.NET/C#) & QA Automation",
+    "summary": "Ingeniero de Software con 3 años de experiencia diseñando servicios Backend robustos (.NET/C#) y arquitecturas QA.",
+    "email": "axel.a.linares@gmail.com",
+    "phone": "5542284164",
+    "location": "Ciudad de México",
+    "linkedInUrl": "https://www.linkedin.com/in/axel-linares",
+    "gitHubUrl": "https://github.com/ElorichV",
+    "hardSkills": ["C#", ".NET 8", "Playwright", "Browserbase", "n8n.cloud", "Backboard.io", "Firecrawl"],
+    "softSkills": ["Liderazgo Técnico", "Shift-Left Testing & Cultura de Calidad"],
+    "experiences": [
+      {
+        "id": 1,
+        "jobTitle": "Software Engineer (Co-Founder)",
+        "company": "Positronica Labs",
+        "dates": "Enero 2026 - Actualidad",
+        "companyUrl": "https://positronicalabs.dev",
+        "responsibilities": ["Liderazgo técnico y Clean Architecture en .NET Core."]
+      }
+    ],
+    "projects": [
+      {
+        "id": 1,
+        "title": "BenchEngine / GreenGemma (MLH Hackathon)",
+        "description": "Plataforma de benchmarking energético local para LLMs abiertos.",
+        "projectUrl": "https://devpost.com/software/benchengine",
+        "category": "AI Hackathons & Agentes",
+        "badge": "🏆 4to Lugar MLH Hackathon",
+        "techStack": ["Gemma 4", "Ollama", "Firecrawl"],
+        "architectureNotes": ["Inferencia local vs Cloud con latencia cero."]
+      },
+      {
+        "id": 2,
+        "title": "Cloud Portfolio Engine & API Core (.NET 8 + AWS)",
+        "description": "Plataforma Full-Stack desacoplada con Rate Limiting y RFC 7807.",
+        "projectUrl": "https://github.com/ElorichV/AxelLinaresApi",
+        "category": "Backend & Cloud (.NET)",
+        "badge": "☁️ AWS S3 + CloudFront + .NET 8",
+        "techStack": ["C#", ".NET 8", "EF Core", "SQLite"],
+        "architectureNotes": ["FixedWindowRateLimiter por IP y ProblemDetails."]
+      },
+      {
+        "id": 3,
+        "title": "Plataforma 'Mi Primera Chamba' (Equipo QA Tester)",
+        "description": "Integrante del equipo de QA ejecutando Shift-Left Testing.",
+        "projectUrl": null,
+        "category": "QA Automation & DSA",
+        "badge": "🎯 Shift-Left QA Team",
+        "techStack": ["QA Funcional", "Playwright", "Shift-Left Testing"],
+        "architectureNotes": ["Colaboración directa sin exponer repositorios internos."]
+      }
+    ],
+    "certifications": [
+      {
+        "id": 1,
+        "name": "AWS Certified Cloud Practitioner (CLF-C02)",
+        "issuingOrganization": "Amazon Web Services",
+        "credentialUrl": "https://aws.amazon.com/verification"
+      }
+    ]
+  }
+}

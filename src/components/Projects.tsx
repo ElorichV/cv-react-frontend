@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Database, ShieldCheck, Cpu, Layout, Bot, Code2, Sparkles, Lock, X, CheckCircle2, Layers } from 'lucide-react';
+import PortfolioTestSuiteModal from './PortfolioTestSuiteModal';
 
 export interface ProjectItem {
     id: number;
@@ -19,9 +20,10 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [activeTab, setActiveTab] = useState<'All' | 'Hackathons' | 'Backend' | 'QA'>('All');
     const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+    const [isTestSuiteOpen, setIsTestSuiteOpen] = useState<boolean>(false);
 
     const fallbackProjects: ProjectItem[] = [
         {
@@ -244,6 +246,19 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
                             {t('projects_subtitle')}
                         </p>
                     </div>
+
+                    <button
+                        type="button"
+                        onClick={() => setIsTestSuiteOpen(true)}
+                        className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-red-950/40 hover:bg-red-600/20 border border-red-500/50 hover:border-red-500 text-red-400 hover:text-white font-mono text-xs font-bold tracking-wider transition-all shadow-[0_0_20px_rgba(220,38,38,0.15)] cursor-pointer shrink-0"
+                    >
+                        <ShieldCheck size={16} className="text-red-500" />
+                        <span>
+                            {i18n.language.startsWith('en')
+                                ? '[ 🧪 View This Portfolio’s QA Suite & Code ]'
+                                : '[ 🧪 Ver Suite QA & Pruebas de este Portafolio ]'}
+                        </span>
+                    </button>
                 </div>
 
                 {/* Barra de Filtros por Categoría */}
@@ -471,6 +486,11 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <PortfolioTestSuiteModal
+                isOpen={isTestSuiteOpen}
+                onClose={() => setIsTestSuiteOpen(false)}
+            />
         </section>
     );
 };
