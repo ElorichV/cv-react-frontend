@@ -2,7 +2,7 @@ import axios from 'axios';
 // Asumiendo que mueves tus interfaces a un archivo types, o las importas aquí
 // Por ahora usamos 'any' o copiamos la interfaz UserProfile para no complicarte el refactor inmediato
 
-const API_URL = 'https://d1xk37jjpjmwph.cloudfront.net/api/Profile';
+const API_URL = 'https://axellinares-api-chh4h8bcg0gubgaa.westus2-01.azurewebsites.net/api/Profile';
 
 export const getProfileData = async () => {
   try {

@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
 
   useEffect(() => {
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const healthUrl = isLocal ? 'http://localhost:5139/' : 'https://d1xk37jjpjmwph.cloudfront.net/api/Profile';
+    const healthUrl = isLocal ? 'http://localhost:5139/' : 'https://axellinares-api-chh4h8bcg0gubgaa.westus2-01.azurewebsites.net/';
     const start = performance.now();
 
     fetch(healthUrl)

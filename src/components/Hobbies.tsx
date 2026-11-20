@@ -176,6 +176,16 @@ const Hobbies: React.FC = () => {
                                         <span>[ {t('hobby_pokednd_visit_btn')} ]</span>
                                         <ExternalLink size={13} />
                                     </a>
+
+                                    <a
+                                        href="/floorplans/pokednd.html"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800/90 hover:bg-slate-700 border border-red-500/40 text-red-400 hover:text-white font-mono text-xs font-semibold transition-all"
+                                    >
+                                        <span>[ {t('hobby_pokednd_floorplan_btn', '🗺️ Ver Floorplan')} ]</span>
+                                        <ExternalLink size={13} />
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -13,6 +13,7 @@ export interface ProjectItem {
     badge?: string;
     techStack?: string[];
     architectureNotes?: string[];
+    architectureDiagramUrl?: string | null;
 }
 
 interface ProjectsProps {
@@ -31,6 +32,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'BenchEngine / GreenGemma (MLH Hackathon)',
             description: 'Galardonado con Mención Honorífica (4to lugar) en MLH. Plataforma de benchmarking energético local para modelos abiertos (Gemma 4) con extracción estructurada vía Firecrawl, autenticación OTP y síntesis de voz con ElevenLabs.',
             projectUrl: 'https://github.com/ElorichV/hacktoberfest2026',
+            architectureDiagramUrl: '/floorplans/benchengine.html',
             category: 'Hackathons',
             badge: '🏆 4to Lugar MLH Hackathon',
             techStack: ['Ollama (Gemma 4)', 'Firecrawl', 'ElevenLabs', 'React', 'MojoAuth OTP'],
@@ -45,6 +47,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'Voz Abierta — Traductor Bidireccional LSM 3D',
             description: 'Prototipo desarrollado para el AI Hackathon por México × Clara. Traductor en tiempo real entre Lengua de Señas Mexicana (LSM) y español utilizando visión computacional con MediaPipe, avatar 3D en Three.js y Web Speech API.',
             projectUrl: 'https://github.com/ElorichV/Voz-abierta',
+            architectureDiagramUrl: '/floorplans/voz-abierta.html',
             category: 'Hackathons',
             badge: '🚀 AI Hackathon × Clara',
             techStack: ['MediaPipe', 'Three.js', 'Web Speech API', 'React', 'TypeScript'],
@@ -59,6 +62,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'Voice2Task — Agente iOS Voz a GitHub Issues',
             description: 'Aplicación nativa iOS (SwiftUI + SwiftData) que transcribe notas de voz técnicas en tiempo real con SFSpeechRecognizer, extrae tareas estructuradas mediante OpenAI (gpt-4o-mini) y las sincroniza automáticamente con GitHub Issues.',
             projectUrl: 'https://github.com/ElorichV/Voice2Task',
+            architectureDiagramUrl: '/floorplans/voice2task.html',
             category: 'Hackathons',
             badge: '📱 Native iOS + AI Agents',
             techStack: ['SwiftUI', 'SwiftData', 'OpenAI API', 'SFSpeechRecognizer', 'GitHub REST API'],
@@ -73,6 +77,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'Sistema ERP/POS de Gestión para Panaderías',
             description: 'Ecosistema empresarial Full-Stack diseñado bajo Clean Architecture con .NET 8 Web API, Entity Framework Core y SQL Server. Implementa control de inventario multi-ingrediente con transacciones ACID y cliente SPA en React 18.',
             projectUrl: 'https://github.com/ElorichV/Sistema-de-gestion-para-panaderias',
+            architectureDiagramUrl: '/floorplans/panaderia-erp.html',
             category: 'Backend',
             badge: '🏛️ Clean Architecture & ACID',
             techStack: ['.NET 8 Web API', 'C#', 'SQL Server', 'EF Core', 'Clean Architecture', 'React 18'],
@@ -87,6 +92,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'Portafolio Cloud Engine & API Core (.NET 8 + AWS)',
             description: 'Plataforma Full-Stack desacoplada desplegada sobre AWS (S3, CloudFront y Elastic Beanstalk). Backend en .NET 8 con Rate Limiting nativo por IP, sanitización AppSec contra inyección CRLF y respuestas estandarizadas RFC 7807.',
             projectUrl: 'https://github.com/ElorichV/AxelLinaresApi',
+            architectureDiagramUrl: '/floorplans/portafolio-cloud.html',
             category: 'Backend',
             badge: '☁️ AWS S3 + CloudFront + .NET 8',
             techStack: ['.NET 8', 'ASP.NET Core', 'AWS S3 & CloudFront', 'SQLite', 'RFC 7807', 'React + Vite'],
@@ -101,6 +107,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'TaskMaster API — Modern CFML Showcase',
             description: 'API RESTful de grado productivo construida 100% en cfscript moderno sobre Lucee y CommandBox. Implementa arquitectura por capas, autenticación stateless JWT (HMAC-SHA256), base de datos H2 embebida y contratos RFC 7807.',
             projectUrl: 'https://github.com/ElorichV/TaskMaster-API-Modern-CFML-Showcase',
+            architectureDiagramUrl: '/floorplans/taskmaster-cfml.html',
             category: 'Backend',
             badge: '🛡️ AppSec & OWASP Top 10',
             techStack: ['Modern CFML', 'Lucee', 'JWT HMAC-SHA256', 'RFC 7807', 'H2 Database', 'CommandBox'],
@@ -115,6 +122,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'QA AI-Assistant & Enterprise Playwright Suite',
             description: 'Framework de automatización E2E en C# / .NET 9, Playwright y NUnit integrado con un asistente analítico en Python / OpenAI API que captura excepciones de ejecución en tiempo real para diagnosticar causas raíz y sugerir parches.',
             projectUrl: 'https://github.com/ElorichV/Playwrigth_Demo',
+            architectureDiagramUrl: '/floorplans/qa-ai-playwright.html',
             category: 'QA',
             badge: '🤖 Playwright + OpenAI API',
             techStack: ['C#', '.NET 9', 'Playwright', 'Python', 'OpenAI API', 'NUnit', 'Browserbase'],
@@ -129,6 +137,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'Plataforma "Mi Primera Chamba" (Equipo QA Tester)',
             description: 'Integrante del equipo de aseguramiento de calidad (QA) ejecutando pruebas funcionales, validación de flujos críticos de usuario y reporte temprano de defectos (Shift-Left Testing) para garantizar la estabilidad previo a despliegues productivos.',
             projectUrl: null,
+            architectureDiagramUrl: '/floorplans/mi-primera-chamba.html',
             category: 'QA',
             badge: '🎯 Shift-Left QA Team',
             techStack: ['Shift-Left Testing', 'QA Funcional & E2E', 'Validación de Flujos', 'Reporte de Defectos', 'Regresión'],
@@ -143,6 +152,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
             title: 'Algoritmia Avanzada y Programación Competitiva (OMI)',
             description: 'Repositorio de más de 50 soluciones de alto rendimiento en C++ para la Olimpiada Mexicana de Informática (OMI) y jueces en línea, implementando estructuras de datos avanzadas y optimización de complejidad.',
             projectUrl: 'https://github.com/ElorichV/Codigos-de-aprendizaje-y-competencia',
+            architectureDiagramUrl: '/floorplans/algoritmia-omi.html',
             category: 'QA',
             badge: '⚡ C++ Advanced DSA',
             techStack: ['C++', 'Treaps', 'Persistent Segment Trees', 'Graph Theory', 'Dynamic Programming'],
@@ -154,7 +164,27 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
         }
     ];
 
-    const allProjects: ProjectItem[] = projects && projects.length >= 6 ? projects : fallbackProjects;
+    const resolveFloorplanUrl = (project: ProjectItem): string | null => {
+        if (project.architectureDiagramUrl) return project.architectureDiagramUrl;
+        const byId = fallbackProjects.find(f => f.id === project.id);
+        if (byId?.architectureDiagramUrl) return byId.architectureDiagramUrl;
+        const title = project.title.toLowerCase();
+        if (title.includes('benchengine') || title.includes('greengemma')) return '/floorplans/benchengine.html';
+        if (title.includes('voz abierta')) return '/floorplans/voz-abierta.html';
+        if (title.includes('voice2task')) return '/floorplans/voice2task.html';
+        if (title.includes('panader') || title.includes('bakery')) return '/floorplans/panaderia-erp.html';
+        if (title.includes('portafolio') || title.includes('cloud engine')) return '/floorplans/portafolio-cloud.html';
+        if (title.includes('taskmaster')) return '/floorplans/taskmaster-cfml.html';
+        if (title.includes('qa ai-assistant') || title.includes('playwright')) return '/floorplans/qa-ai-playwright.html';
+        if (title.includes('chamba')) return '/floorplans/mi-primera-chamba.html';
+        if (title.includes('algoritmia') || title.includes('omi')) return '/floorplans/algoritmia-omi.html';
+        return null;
+    };
+
+    const allProjects: ProjectItem[] = (projects && projects.length >= 6 ? projects : fallbackProjects).map(p => ({
+        ...p,
+        architectureDiagramUrl: resolveFloorplanUrl(p)
+    }));
 
     const filteredProjects = activeTab === 'All'
         ? allProjects
@@ -340,13 +370,27 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
                                         </div>
                                     </div>
 
-                                    <div className="p-6 pt-3 border-t border-slate-800/70 relative z-20 flex items-center justify-between gap-3 mt-auto">
-                                        <button
-                                            onClick={() => setSelectedProject(project)}
-                                            className="px-3 py-2 rounded-lg bg-red-600/15 border border-red-500/30 text-red-400 hover:bg-red-600 hover:text-white font-mono text-[11px] font-bold uppercase tracking-wider transition-all"
-                                        >
-                                            {t('projects_view_arch', '[ Ficha_Arquitectura ] ⚡')}
-                                        </button>
+                                    <div className="p-6 pt-3 border-t border-slate-800/70 relative z-20 flex flex-wrap items-center justify-between gap-2 mt-auto">
+                                        <div className="flex items-center gap-2">
+                                            <button
+                                                onClick={() => setSelectedProject(project)}
+                                                className="px-3 py-2 rounded-lg bg-red-600/15 border border-red-500/30 text-red-400 hover:bg-red-600 hover:text-white font-mono text-[11px] font-bold uppercase tracking-wider transition-all"
+                                            >
+                                                {t('projects_view_arch', '[ Ficha_Arquitectura ] ⚡')}
+                                            </button>
+
+                                            {project.architectureDiagramUrl && (
+                                                <a
+                                                    href={project.architectureDiagramUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="px-2.5 py-2 rounded-lg bg-slate-800/80 border border-slate-700 hover:border-red-500/50 text-slate-300 hover:text-white font-mono text-[11px] font-bold uppercase tracking-wider transition-all"
+                                                    title="Abrir Floorplan Interactivo"
+                                                >
+                                                    {t('projects_view_floorplan', '[ 🗺️ Floorplan ] ↗')}
+                                                </a>
+                                            )}
+                                        </div>
 
                                         {hasExternalUrl ? (
                                             <a
@@ -389,7 +433,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.92, opacity: 0, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="w-full max-w-2xl bg-[#0b1120] border border-red-500/40 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.25)]"
+                            className="w-full max-w-4xl bg-[#0b1120] border border-red-500/40 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.25)]"
                         >
                             {/* Barra superior tipo terminal */}
                             <div className="flex items-center justify-between px-6 py-4 bg-slate-900/90 border-b border-slate-800">
@@ -408,7 +452,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
                             </div>
 
                             {/* Contenido del expediente */}
-                            <div className="p-6 md:p-8 space-y-6 max-h-[80vh] overflow-y-auto">
+                            <div className="p-6 md:p-8 space-y-6 max-h-[82vh] overflow-y-auto">
                                 <div>
                                     {selectedProject.badge && (
                                         <span className="inline-block px-3 py-1 mb-3 bg-red-500/10 border border-red-500/30 rounded-full text-xs font-mono text-red-400">
@@ -437,6 +481,34 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
                                                 </li>
                                             ))}
                                         </ul>
+                                    </div>
+                                )}
+
+                                {/* Mapa de Arquitectura Interactivo (Floorplan) */}
+                                {selectedProject.architectureDiagramUrl && (
+                                    <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-5">
+                                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                                            <h4 className="text-xs font-mono uppercase tracking-widest text-red-400 font-bold flex items-center gap-2">
+                                                <Layers size={14} className="text-red-500" />
+                                                {t('arch_modal_diagram', 'Mapa de Arquitectura Interactivo (Floorplan)')}
+                                            </h4>
+                                            <a 
+                                                href={selectedProject.architectureDiagramUrl} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="px-3 py-1 rounded-lg bg-red-600/20 border border-red-500/40 text-[11px] font-mono text-red-300 hover:bg-red-600 hover:text-white transition-all font-bold"
+                                            >
+                                                {t('arch_modal_open_floorplan', '[ 🗺️ Abrir Floorplan en Pantalla Completa ↗ ]')}
+                                            </a>
+                                        </div>
+                                        <div className="w-full h-96 md:h-[460px] rounded-lg overflow-hidden border border-slate-700/60 bg-slate-950/80 shadow-inner">
+                                            <iframe
+                                                src={selectedProject.architectureDiagramUrl}
+                                                title={`Floorplan de ${selectedProject.title}`}
+                                                className="w-full h-full border-0"
+                                                allowFullScreen
+                                            />
+                                        </div>
                                     </div>
                                 )}
 

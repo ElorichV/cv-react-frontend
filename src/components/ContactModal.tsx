@@ -29,7 +29,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
             const emailApiUrl = isLocal
                 ? 'http://localhost:5139/api/email/send'
-                : 'https://d1xk37jjpjmwph.cloudfront.net/api/email/send';
+                : 'https://axellinares-api-chh4h8bcg0gubgaa.westus2-01.azurewebsites.net/api/email/send';
 
             const response = await fetch(emailApiUrl, {
                 method: 'POST',

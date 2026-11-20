@@ -74,7 +74,7 @@ function App() {
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const baseUrl = isLocal
             ? 'http://localhost:5139/api/Profile'
-            : 'https://d1xk37jjpjmwph.cloudfront.net/api/Profile';
+            : 'https://axellinares-api-chh4h8bcg0gubgaa.westus2-01.azurewebsites.net/api/Profile';
         // =========================================================
 
         // 3. INYECTA EL IDIOMA ACTUAL EN LA URL DE LA PETICIÓN

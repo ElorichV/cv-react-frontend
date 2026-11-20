@@ -23,9 +23,13 @@ const resources = {
 
             "arch_modal_tag": "> ESPECIFICACIÓN_DE_ARQUITECTURA_",
             "arch_modal_decisions": "Decisiones Técnicas, Arquitectura & Impacto (Mid-Level)",
+            "arch_modal_diagram": "Mapa de Arquitectura Interactivo (Floorplan)",
+            "arch_modal_open_floorplan": "[ 🗺️ Abrir Floorplan en Pantalla Completa ↗ ]",
             "arch_modal_stack": "Stack Tecnológico & Herramientas",
             "arch_modal_close": "[ Cerrar_Expediente ]",
             "arch_modal_confidential": "Colaboración en equipo — Sin exposición de repositorios privados por confidencialidad.",
+            "projects_view_floorplan": "[ 🗺️ Floorplan ] ↗",
+            "hobby_pokednd_floorplan_btn": "🗺️ Ver Floorplan",
 
             "profile_section": "> Protocolo_Identidad_",
             "profile_heading": "Ingeniería con Propósito",
@@ -136,9 +140,13 @@ const resources = {
 
             "arch_modal_tag": "> ARCHITECTURE_SPECIFICATION_",
             "arch_modal_decisions": "Technical Decisions, Architecture & Impact (Mid-Level)",
+            "arch_modal_diagram": "Interactive Architecture Map (Floorplan)",
+            "arch_modal_open_floorplan": "[ 🗺️ Open Fullscreen Floorplan ↗ ]",
             "arch_modal_stack": "Tech Stack & Tooling",
             "arch_modal_close": "[ Close_Dossier ]",
             "arch_modal_confidential": "Team collaboration — Internal repositories are not exposed due to confidentiality.",
+            "projects_view_floorplan": "[ 🗺️ Floorplan ] ↗",
+            "hobby_pokednd_floorplan_btn": "🗺️ View Floorplan",
 
             "profile_section": "> Identity_Protocol_",
             "profile_heading": "Engineering with Purpose",
