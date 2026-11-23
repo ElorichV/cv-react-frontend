@@ -5,40 +5,13 @@ import { useTranslation } from 'react-i18next';
 // Componentes modulares
 import Header from './components/Header';
 import Profile from './components/Profile';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
+import Experience, { type WorkExperience } from './components/Experience';
+import Projects, { type ProjectItem } from './components/Projects';
 import Skills from './components/Skills';
-import Education from './components/Education';
+import Education, { type Certification } from './components/Education';
 import Footer from './components/Footer';
 import ParticlesBackground from './components/ParticlesBackground';
 import Hobbies from './components/Hobbies';
-
-export interface WorkExperience {
-    id: number;
-    jobTitle?: string;
-    company: string;
-    dates: string;
-    responsibilities: string[];
-    companyUrl?: string;
-}
-
-export interface Project {
-    id: number;
-    title: string;
-    description: string;
-    projectUrl?: string | null;
-    category?: string;
-    badge?: string;
-    techStack?: string[];
-    architectureNotes?: string[];
-}
-
-export interface Certification {
-    id: number;
-    name: string;
-    issuingOrganization: string;
-    credentialUrl?: string;
-}
 
 export interface UserProfile {
     id: number;
@@ -53,78 +26,91 @@ export interface UserProfile {
     hardSkills: string[];
     softSkills: string[];
     experiences: WorkExperience[];
-    projects: Project[];
+    projects: ProjectItem[];
     certifications: Certification[];
 }
 
+const fallbackProfile: UserProfile = {
+    id: 1,
+    name: 'Axel Linares',
+    title: 'Software Engineer & QA Automation Architect',
+    summary: 'Ingeniero de Software con 3 años de experiencia diseñando servicios Backend robustos (.NET/C#) y construyendo arquitecturas de automatización de pruebas (QA). Especializado en el desarrollo de APIs REST, optimización avanzada de bases de datos SQL y la creación de suites automatizadas End-to-End (E2E) mediante Playwright. Orientado a garantizar la alta disponibilidad, seguridad y escalabilidad en ecosistemas ágiles y despliegues nativos en la nube (AWS).',
+    email: 'axel.linares.dev@gmail.com',
+    phone: '+52 55 ...',
+    location: 'Ciudad de México, México',
+    linkedInUrl: 'https://www.linkedin.com/in/axel-alberto-linares-lorrabaquio/',
+    gitHubUrl: 'https://github.com/ElorichV',
+    hardSkills: ['C#', '.NET 8', 'Playwright', 'SQL Server', 'AWS', 'Python', 'React', 'Clean Architecture'],
+    softSkills: [
+        'Liderazgo Técnico',
+        'Aprendizaje Autónomo (Autodidacta)',
+        'Resolución de Problemas Complejos',
+        'Comunicación Técnica Efectiva',
+        'Adaptabilidad Tecnológica',
+        'Pensamiento Crítico y Analítico',
+        'Shift-Left Testing & Cultura de Calidad',
+        'Resiliencia bajo Presión'
+    ],
+    experiences: [],
+    projects: [],
+    certifications: []
+};
+
 function App() {
-    const [profile, setProfile] = useState<UserProfile | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-
-
-    // 2. INICIALIZA EL MOTOR EN EL APP
+    const [profile, setProfile] = useState<UserProfile>(fallbackProfile);
     const { i18n } = useTranslation();
 
     useEffect(() => {
-        setLoading(true); // Activa la micro-carga al cambiar de idioma
-
-        // =========================================================
-        // Detección automática de entorno (Localhost vs Producción AWS)
+        // Detección automática de entorno (Localhost vs Producción Azure/AWS)
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const baseUrl = isLocal
             ? 'http://localhost:5139/api/Profile'
             : 'https://axellinares-api-chh4h8bcg0gubgaa.westus2-01.azurewebsites.net/api/Profile';
-        // =========================================================
 
-        // 3. INYECTA EL IDIOMA ACTUAL EN LA URL DE LA PETICIÓN
         const apiUrl = `${baseUrl}?lang=${i18n.language}`;
 
-        axios.get(apiUrl)
+        axios.get(apiUrl, { timeout: 3500 })
             .then(response => {
                 const data = Array.isArray(response.data) ? response.data[0] : response.data;
-                setProfile(data);
-                setLoading(false);
+                if (data && typeof data === 'object') {
+                    setProfile(prev => ({ ...prev, ...data }));
+                }
             })
             .catch(err => {
-                console.error("Error de conexión:", err);
-                setError("Error al conectar con la base de datos.");
-                setLoading(false);
+                // Modo resiliente offline: se mantiene el fallbackProfile completo y pulcro
+                console.info("Backend API en standby/offline, usando perfil local resiliente:", err.message);
             });
 
-    }, [i18n.language]); // <-- 4. CRÍTICO: El useEffect se vuelve a ejecutar cada vez que cambia el idioma
-    if (loading) return (
-        <div className="flex justify-center items-center h-screen bg-[#0f172a] text-white">
-            <div className="text-2xl animate-pulse text-red-500 font-mono">&gt; Cargando sistema...</div>
-        </div>
-    );
-
-    if (error) return (
-        <div className="flex justify-center items-center h-screen bg-[#0f172a] text-red-500">
-            <div className="text-xl font-bold font-mono">&gt; {error}_</div>
-        </div>
-    );
-
-    if (!profile) return null;
+    }, [i18n.language]);
 
     return (
-        <div className="min-h-screen bg-[#0f172a] text-slate-300 relative selection:bg-red-500/30 selection:text-white">
+        <div className="min-h-screen bg-[#0a0b0e] text-slate-200 relative selection:bg-red-600 selection:text-white font-sans antialiased overflow-x-hidden">
+            {/* Ambient Particle Matrix */}
             <ParticlesBackground />
+
+            {/* Tactical Grid Overlay */}
+            <div className="fixed inset-0 bg-[radial-gradient(#1f242e_1px,transparent_1px)] [background-size:32px_32px] opacity-25 pointer-events-none z-0"></div>
+
             <div className="relative z-10">
+                {/* Tactical Header with Sticky Navbar & Telemetry Hero */}
                 <Header data={{
                     name: profile.name,
                     title: profile.title,
                     linkedInUrl: profile.linkedInUrl,
                     gitHubUrl: profile.gitHubUrl
                 }} />
-                <main className="container mx-auto max-w-6xl min-h-screen">
+
+                {/* Main Content Sections */}
+                <main className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
                     <Profile summary={profile.summary} />
                     <Experience experiences={profile.experiences || []} />
                     <Skills hardSkills={profile.hardSkills} softSkills={profile.softSkills} />
-                    <Projects projects={profile.projects} />
-                    <Education certifications={profile.certifications} />
+                    <Projects projects={profile.projects || []} />
+                    <Education certifications={profile.certifications || []} />
                     <Hobbies />
                 </main>
+
+                {/* Footer with Telemetry */}
                 <Footer />
             </div>
         </div>

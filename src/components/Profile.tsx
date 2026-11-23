@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Shield, Target, Zap } from 'lucide-react';
+import { Shield, Target, Zap, ArrowRight } from 'lucide-react';
 
 interface ProfileProps {
     summary?: string;
@@ -11,77 +11,123 @@ const Profile: React.FC<ProfileProps> = ({ summary }) => {
     const { t } = useTranslation();
     const bioText = summary || t('profile_bio');
 
+    const pillars = [
+        {
+            num: '01',
+            icon: <Shield size={18} className="text-red-500" />,
+            title: t('pilar1_title', 'Integridad'),
+            desc: t('pilar1_desc', 'El dato es el activo más valioso. Diseño bases de datos SQL con integridad referencial absoluta y optimización de índices.')
+        },
+        {
+            num: '02',
+            icon: <Target size={18} className="text-amber-400" />,
+            title: t('pilar2_title', 'Estabilidad'),
+            desc: t('pilar2_desc', 'Si no está probado, está roto. Implemento suites de QA E2E con Playwright/Browserbase y Shift-Left Testing que eliminan regresiones.')
+        },
+        {
+            num: '03',
+            icon: <Zap size={18} className="text-red-400" />,
+            title: t('pilar3_title', 'Escalabilidad'),
+            desc: t('pilar3_desc', 'Backend diseñado para la nube. Arquitecturas Clean Architecture en .NET y orquestación de agentes listas para AWS y Render.')
+        }
+    ];
+
     return (
-        <section id="sobre-mi" className="py-24 relative overflow-hidden">
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-red-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+        <section id="sobre-mi" className="py-20 md:py-28 relative">
+            {/* Ambient Background Blur */}
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-80 h-80 bg-red-600/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-            <div className="container mx-auto px-6 md:px-12 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                
+                {/* Section Header */}
+                <div className="mb-14">
+                    <div className="flex items-center gap-2 mb-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                        <span className="font-mono text-xs text-amber-400/90 tracking-widest uppercase">
+                            01 // {t('profile_section', '> PROTOCOLO_IDENTIDAD_')}
+                        </span>
+                    </div>
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight">
+                        {t('profile_heading', 'Ingeniería con Propósito')}
+                    </h2>
+                </div>
 
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    {/* Left: Axel's Portrait Card */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8 }}
-                        className="relative flex justify-center"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="lg:col-span-4 flex flex-col items-center lg:items-start"
                     >
-                        <div className="relative w-72 h-72 md:w-96 md:h-96">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-red-600 to-transparent rounded-3xl rotate-6 opacity-20 blur-sm"></div>
-                            <div className="absolute inset-0 border border-red-500/30 rounded-3xl -rotate-3"></div>
-                            <div className="relative w-full h-full bg-slate-800 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl">
+                        <div className="relative w-full max-w-sm rounded-lg overflow-hidden border border-slate-800 bg-[#0d0f14] p-3 shadow-2xl group hover:border-amber-500/40 transition-all">
+                            {/* Inner Framing Accent */}
+                            <div className="relative aspect-square w-full rounded overflow-hidden border border-slate-800/80 bg-slate-900">
                                 <img
                                     src="/axel-profile.jpg"
                                     alt="Axel Linares"
-                                    className="w-full h-full object-cover object-[center_20%]"
+                                    className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-700"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0e] via-transparent to-transparent opacity-60"></div>
+                            </div>
+
+                            {/* Card Footer Telemetry */}
+                            <div className="pt-3 px-1 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                                <span>ID: AL-8092</span>
+                                <span className="text-amber-400/90 flex items-center gap-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                    ACTIVE VERIFIED
+                                </span>
                             </div>
                         </div>
                     </motion.div>
 
-                    <div className="flex flex-col space-y-8">
+                    {/* Right: Bio & The 3 Pillars */}
+                    <div className="lg:col-span-8 flex flex-col space-y-8">
                         <div>
-                            <p className="text-red-500 font-mono tracking-widest uppercase mb-4 text-sm font-semibold">
-                                {t('profile_section')}
-                            </p>
-                            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-                                {t('profile_heading')}
-                            </h2>
-                            <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
+                            <p className="text-slate-300 text-base md:text-lg leading-relaxed font-sans">
                                 {bioText}
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4">
-                            {[
-                                { icon: <Shield size={20}/>, title: t('pilar1_title'), desc: t('pilar1_desc') },
-                                { icon: <Target size={20}/>, title: t('pilar2_title'), desc: t('pilar2_desc') },
-                                { icon: <Zap size={20}/>, title: t('pilar3_title'), desc: t('pilar3_desc') }
-                            ].map((pilar, index) => (
+                        {/* The 3 Pillars Cards */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            {pillars.map((pillar) => (
                                 <motion.div
-                                    key={index}
-                                    whileHover={{ x: 10 }}
-                                    className="flex items-start gap-4 p-4 bg-slate-900/50 backdrop-blur-md border border-slate-800 rounded-2xl hover:border-red-500/30 transition-all"
+                                    key={pillar.num}
+                                    whileHover={{ y: -4 }}
+                                    className="p-5 rounded-lg bg-[#111318]/70 border border-slate-800 border-t-amber-500/40 hover:border-red-500/50 transition-all flex flex-col justify-between shadow-lg"
                                 >
-                                    <div className="p-2 bg-red-600/10 text-red-500 rounded-lg">
-                                        {pilar.icon}
-                                    </div>
                                     <div>
-                                        <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-1">
-                                            {pilar.title}
+                                        <div className="flex items-center justify-between mb-3">
+                                            <div className="p-2 rounded bg-slate-900/80 border border-slate-800">
+                                                {pillar.icon}
+                                            </div>
+                                            <span className="font-mono text-[10px] text-slate-500 tracking-wider">
+                                                {pillar.num}
+                                            </span>
+                                        </div>
+                                        <h3 className="font-display text-xl font-semibold text-white tracking-wide mb-2">
+                                            {pillar.title}
                                         </h3>
-                                        <p className="text-slate-500 text-xs leading-normal">
-                                            {pilar.desc}
+                                        <p className="text-slate-400 text-xs leading-relaxed font-sans">
+                                            {pillar.desc}
                                         </p>
                                     </div>
                                 </motion.div>
                             ))}
                         </div>
 
+                        {/* Lore Workshop Link */}
                         <div className="pt-2">
                             <a
                                 href="#offline"
-                                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-950/30 border border-red-500/30 hover:border-red-500 text-xs font-mono text-red-400 hover:text-red-300 transition-all shadow-sm hover:shadow-red-900/20"
+                                className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-slate-900/60 border border-amber-500/30 hover:border-amber-400 text-xs font-mono text-amber-300 hover:text-white transition-all shadow-sm"
                             >
-                                {t('profile_lore_badge')}
+                                <span>{t('profile_lore_badge', 'Inspirado en la disciplina y maestría artesanal de la IX Legión →')}</span>
+                                <ArrowRight size={13} />
                             </a>
                         </div>
                     </div>

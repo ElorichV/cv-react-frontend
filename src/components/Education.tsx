@@ -1,6 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Award, ShieldCheck, GraduationCap, Calendar } from 'lucide-react';
+import { GraduationCap, Calendar, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export interface Certification {
@@ -15,19 +14,20 @@ interface EducationProps {
 }
 
 const Education: React.FC<EducationProps> = ({ certifications = [] }) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
+    const isEn = i18n.language.startsWith('en');
 
     const fallbackCertifications: Certification[] = [
         {
             id: 1,
             name: 'AWS Certified Cloud Practitioner (CLF-C02)',
-            issuingOrganization: 'AWS',
+            issuingOrganization: 'Amazon Web Services',
             credentialUrl: 'https://aws.amazon.com/certification/certified-cloud-practitioner/'
         },
         {
             id: 2,
             name: 'Cybersecurity Defense Analyst, Cyber Threat & Network Defense',
-            issuingOrganization: 'Cisco',
+            issuingOrganization: 'Cisco Networking Academy',
             credentialUrl: 'https://www.credly.com/users/axel-alberto-linares-lorrabaquio/badges'
         },
         {
@@ -47,98 +47,104 @@ const Education: React.FC<EducationProps> = ({ certifications = [] }) => {
     const displayCerts = certifications && certifications.length > 0 ? certifications : fallbackCertifications;
 
     return (
-        <section id="educacion" className="py-24 relative">
-            <div className="container mx-auto px-6 md:px-12 relative z-10">
+        <section id="educacion" className="py-20 md:py-28 relative">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-                {/* Cabecera de Sección */}
-                <div className="mb-16">
-                    <p className="text-red-500 font-mono tracking-widest uppercase mb-4 text-sm font-semibold">
-                        {t('edu_section', '> Base_de_Conocimiento_')}
-                    </p>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+                {/* Section Header */}
+                <div className="mb-14">
+                    <div className="flex items-center gap-2 mb-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                        <span className="font-mono text-xs text-amber-400/90 tracking-widest uppercase">
+                            05 // {t('edu_section', '> BASE_DE_CONOCIMIENTO_')}
+                        </span>
+                    </div>
+                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight">
                         {t('edu_heading', 'Educación y Certificaciones')}
                     </h2>
                 </div>
 
-                {/* Bloque 1: Formación Académica (Grado Universitario) */}
-                <div className="mb-12">
-                    <h3 className="text-sm font-mono uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                        <GraduationCap className="text-red-500 w-4 h-4" />
-                        {t('edu_academic_title', 'Formación Académica')}
-                    </h3>
-                    <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="bg-slate-900/40 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 md:p-8 hover:border-red-500/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl"
-                    >
+                {/* Degree Card */}
+                <div className="mb-10">
+                    <div className="p-6 md:p-8 rounded-lg bg-[#111318]/70 border border-slate-800 border-t-amber-500/30 hover:border-amber-500/50 transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl">
                         <div className="flex items-start gap-4">
-                            <div className="p-3 bg-red-600/10 text-red-500 rounded-xl shrink-0">
-                                <GraduationCap size={28} />
+                            <div className="p-3 bg-red-950/40 border border-red-500/30 text-red-400 rounded-lg shrink-0">
+                                <GraduationCap size={26} />
                             </div>
                             <div>
-                                <h4 className="text-xl md:text-2xl font-bold text-white mb-2">
+                                <span className="font-mono text-[10px] text-amber-400 uppercase tracking-widest block mb-1">
+                                    {isEn ? 'ACADEMIC DEGREE // VERIFIED' : 'GRADO ACADÉMICO // VERIFICADO'}
+                                </span>
+                                <h3 className="font-display text-2xl font-semibold text-white mb-1">
                                     {t('edu_degree', 'Licenciatura en Ingeniería en Sistemas de Software')}
-                                </h4>
-                                <p className="text-slate-400 font-medium text-base">
-                                    {t('edu_institution', 'UNITEC')}
+                                </h3>
+                                <p className="text-slate-400 text-sm font-sans">
+                                    {t('edu_institution', 'UNITEC — Universidad Tecnológica de México')}
                                 </p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-2 text-red-400 font-mono text-sm bg-red-500/10 border border-red-500/30 px-4 py-2 rounded-xl w-fit">
-                            <Calendar size={16} className="text-red-500" />
-                            <span>{t('edu_status', 'Último Cuatrimestre')}</span>
+                        <div className="flex items-center gap-2 text-amber-300 font-mono text-xs bg-amber-950/20 border border-amber-500/30 px-3.5 py-1.5 rounded w-fit shrink-0">
+                            <Calendar size={13} className="text-amber-400" />
+                            <span>2021 – 2025</span>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
 
-                {/* Bloque 2: Certificaciones Profesionales */}
-                <div>
-                    <h3 className="text-sm font-mono uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                        <Award className="text-red-500 w-4 h-4" />
-                        {t('edu_certs_title', 'Certificaciones Internacionales')}
-                    </h3>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {displayCerts.map((cert, index) => (
-                            <motion.div
-                                key={cert.id || index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="bg-slate-900/40 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 hover:border-red-500/50 transition-all duration-300 group flex flex-col justify-between min-h-[200px] shadow-lg"
-                            >
-                                <div>
-                                    <div className="flex items-start gap-4 mb-4">
-                                        <div className="p-2.5 bg-red-600/10 text-red-500 rounded-xl group-hover:bg-red-500 group-hover:text-white group-hover:shadow-[0_0_15px_rgba(220,38,38,0.5)] transition-all duration-300 shrink-0">
-                                            <Award size={24} />
-                                        </div>
-                                        <h4 className="text-base font-bold text-white group-hover:text-red-400 transition-colors leading-snug">
-                                            {cert.name}
-                                        </h4>
-                                    </div>
-
-                                    <div className="flex items-center gap-2 text-slate-400 font-medium text-sm mb-6 pl-1">
-                                        <ShieldCheck size={16} className="text-slate-500" />
-                                        <span>{cert.issuingOrganization}</span>
-                                    </div>
+                {/* Certifications Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                    {displayCerts.map((cert) => (
+                        <div
+                            key={cert.id}
+                            className="p-5 rounded-lg bg-[#111318]/70 border border-slate-800 hover:border-red-500/40 transition-all flex flex-col justify-between shadow-lg group"
+                        >
+                            <div>
+                                <div className="flex items-center justify-between mb-3">
+                                    <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">
+                                        {cert.issuingOrganization}
+                                    </span>
+                                    <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
                                 </div>
+                                <h4 className="font-display text-lg font-semibold text-white group-hover:text-red-400 transition-colors mb-2">
+                                    {cert.name}
+                                </h4>
+                            </div>
 
-                                {cert.credentialUrl && cert.credentialUrl !== 'N/A' && (
+                            <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                                <span className="text-[10px] font-mono text-slate-400">
+                                    {isEn ? 'Official Credential' : 'Acreditación Oficial'}
+                                </span>
+                                {cert.credentialUrl && (
                                     <a
                                         href={cert.credentialUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-2 text-red-500 font-mono text-xs font-bold uppercase tracking-widest hover:text-white transition-colors mt-auto w-fit"
+                                        className="text-amber-400 hover:text-amber-300 text-xs font-mono inline-flex items-center gap-1.5 font-semibold"
                                     >
-                                        {t('edu_verify', '[ Validar_Credencial ] ↗')}
+                                        <span>{isEn ? 'Verify' : 'Verificar'}</span>
+                                        <ExternalLink size={12} />
                                     </a>
                                 )}
-                            </motion.div>
-                        ))}
-                    </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Direct Credly Hub Link */}
+                <div className="p-4 rounded-lg bg-[#0d0f14] border border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
+                    <span className="text-slate-400">
+                        {isEn
+                            ? 'Looking for official Cisco & industry digital badges?'
+                            : '¿Deseas auditar las insignias digitales oficiales de Cisco y la industria?'}
+                    </span>
+                    <a
+                        href="https://www.credly.com/users/axel-alberto-linares-lorrabaquio/badges"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-amber-400 hover:text-amber-300 font-semibold inline-flex items-center gap-1.5 shrink-0"
+                    >
+                        <span>[ Credly Profile Hub ]</span>
+                        <ExternalLink size={12} />
+                    </a>
                 </div>
 
             </div>
