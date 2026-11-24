@@ -107,8 +107,11 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
             {/* Download CV */}
             <a
               href={`/${cvFileName}`}
+              target="_blank"
+              rel="noopener noreferrer"
               download={cvFileName}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-slate-900 border border-slate-700 hover:border-amber-500/60 text-xs font-mono text-slate-300 hover:text-white transition-all"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded bg-slate-900 border border-slate-700 hover:border-amber-500/60 text-xs font-mono text-slate-300 hover:text-white transition-all"
+              title={isEn ? "Open & Download CV" : "Ver y Descargar CV"}
             >
               <Download size={13} className="text-amber-400" />
               <span>CV</span>
@@ -156,11 +159,13 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
             <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
               <a
                 href={`/${cvFileName}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 download={cvFileName}
                 className="inline-flex items-center gap-2 text-xs font-mono text-amber-400"
               >
                 <Download size={13} />
-                <span>{isEn ? 'Download CV' : 'Descargar CV'}</span>
+                <span>{isEn ? 'View & Download CV' : 'Ver y Descargar CV'}</span>
               </a>
             </div>
           </div>
@@ -253,6 +258,8 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
 
               <a
                 href={`/${cvFileName}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 download={cvFileName}
                 className="inline-flex items-center gap-2 px-4 py-3 rounded bg-slate-900/60 hover:bg-slate-800 border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-mono text-xs transition-all"
               >

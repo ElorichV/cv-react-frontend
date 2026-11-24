@@ -1,0 +1,12 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["*.{pdf,png,jpg,jpeg,gif,svg,ico,webp,woff2,ttf,html}"]
+  },
+  "mimeTypes": {
+    ".pdf": "application/pdf"
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff"
+  }
+}
