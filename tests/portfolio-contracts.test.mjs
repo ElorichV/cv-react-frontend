@@ -3,10 +3,41 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildFallbackProjects } from '../src/lib/fallbackProjects.ts';
+import { projects as dossierProjects, experience as dossierExperience, credentials as dossierCredentials } from '../src/lib/portfolio.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, '..');
+
+/**
+ * Inventario canónico de repositorios públicos verificados en https://github.com/ElorichV?tab=repositories
+ * (Regla 8 de testing: contratos que cruzan una frontera externa).
+ */
+const VERIFIED_PUBLIC_ELORICHV_REPOS = new Set([
+    'Voz-abierta',
+    'TaskMaster-API-Modern-CFML-Showcase',
+    'Serverless-Batch-Order-Processor',
+    'Sistema-de-gestion-para-panaderias',
+    'cv-react-frontend',
+    'nerdearla-mx-pinata',
+    'AxelLinaresApi',
+    'Billetazo',
+    'AWS_Hackathon_Kiro_2026',
+    'PokeD-D',
+    'Voice2Task',
+    'ElorichV',
+    'hacktoberfest2026',
+    'Playwrigth_Demo',
+    'Codigos-de-aprendizaje-y-competencia',
+    'PR-Picafresas-Request',
+    'Proyecto-Aula',
+    'Mohnblumen'
+]);
+
+const RETIRED_HOSTS = new Set([
+    'd1xk37jjpjmwph.cloudfront.net'
+]);
 
 /**
  * Extrae las llaves de traducción de un bloque de idioma ('es' o 'en') en src/i18n.ts
@@ -96,4 +127,75 @@ test('NegativeCheck_BrokenTranslationMap_ThrowsAssertionErrorWhenKeyIsMissing', 
     assert.throws(() => {
         assert.deepEqual(esKeys, enKeys);
     });
+});
+
+test('FallbackProjects_LocalAssetsAndFloorplans_ExistAsNonEmptyFilesInPublicDir', () => {
+    const publicDir = path.join(repoRoot, 'public');
+
+    for (const isEn of [false, true]) {
+        const projects = buildFallbackProjects(isEn);
+        assert.equal(projects.length, 9, 'El catálogo resiliente debe contener los 9 casos de estudio');
+
+        for (const project of projects) {
+            for (const assetField of ['architectureDiagramUrl', 'imageUrl']) {
+                const assetUrl = project[assetField];
+                if (!assetUrl || !assetUrl.startsWith('/')) continue;
+
+                const relativePath = assetUrl.replace(/^\/+/, '');
+                const diskPath = path.join(publicDir, relativePath);
+                assert.ok(
+                    fs.existsSync(diskPath) && fs.statSync(diskPath).size > 0,
+                    `Enlace roto (${assetField}) en '${project.title}': '${assetUrl}' no existe en public/`
+                );
+            }
+        }
+    }
+});
+
+test('FallbackProjects_ExternalGitHubUrls_TargetVerifiedPublicRepositoriesOnly', () => {
+    for (const isEn of [false, true]) {
+        const projects = buildFallbackProjects(isEn);
+
+        for (const project of projects) {
+            if (!project.projectUrl) continue;
+
+            const parsed = new URL(project.projectUrl);
+            assert.equal(parsed.protocol, 'https:', `URL insegura en '${project.title}'`);
+            assert.equal(parsed.hostname, 'github.com', `Host inesperado en '${project.title}'`);
+
+            const segments = parsed.pathname.split('/').filter(Boolean);
+            assert.equal(segments[0], 'ElorichV', `Owner inesperado en '${project.title}'`);
+            assert.ok(
+                VERIFIED_PUBLIC_ELORICHV_REPOS.has(segments[1]),
+                `Repositorio inexistente o con typo (HTTP 404) en '${project.title}': '${project.projectUrl}'`
+            );
+        }
+    }
+
+    for (const item of dossierProjects) {
+        if (!item.repo) continue;
+        const segments = new URL(item.repo).pathname.split('/').filter(Boolean);
+        assert.ok(
+            VERIFIED_PUBLIC_ELORICHV_REPOS.has(segments[1]),
+            `Repositorio inexistente en dossier '${item.title[0]}': '${item.repo}'`
+        );
+    }
+});
+
+test('PortfolioUrls_ActiveDeployments_NeverReferenceRetiredCloudFrontDomain', () => {
+    const candidateUrls = [
+        ...dossierProjects.map((p) => p.live).filter(Boolean),
+        ...dossierExperience.map((e) => e.url).filter(Boolean),
+        ...dossierCredentials.map((c) => c.verify).filter(Boolean)
+    ];
+
+    assert.ok(candidateUrls.length > 0, 'Debe existir al menos una URL activa verificable');
+    for (const rawUrl of candidateUrls) {
+        const parsed = new URL(rawUrl);
+        assert.equal(parsed.protocol, 'https:');
+        assert.ok(
+            !RETIRED_HOSTS.has(parsed.hostname),
+            `Dominio retirado detectado (ERR_NAME_NOT_RESOLVED): '${rawUrl}'`
+        );
+    }
 });

@@ -101,7 +101,7 @@ export const projects = [
     ] as Bilingual,
     tags: ["React 19", "TypeScript", "Vite", "Tailwind"],
     repo: "https://github.com/ElorichV/cv-react-frontend",
-    live: "https://d1xk37jjpjmwph.cloudfront.net/",
+    live: "https://wonderful-plant-00c6cee10.4.azurestaticapps.net/",
     diagram: "spa",
     label: "COMPOSE → RENDER → DELIVER"
   },

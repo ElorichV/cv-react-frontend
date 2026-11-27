@@ -15,6 +15,7 @@ import {
     CheckCircle2
 } from 'lucide-react';
 import PortfolioTestSuiteModal from './PortfolioTestSuiteModal';
+import { buildFallbackProjects } from '../lib/fallbackProjects';
 
 export interface ProjectItem {
     id: number;
@@ -40,191 +41,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
     const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
     const [isTestSuiteOpen, setIsTestSuiteOpen] = useState<boolean>(false);
 
-    const fallbackProjects: ProjectItem[] = [
-        {
-            id: 1,
-            title: 'BenchEngine / GreenGemma (MLH Hackathon)',
-            description: isEn
-                ? 'Awarded Honorable Mention (4th Place) at MLH Hackathon. Local energy benchmarking platform for open LLMs (Gemma 4) with structured Firecrawl extraction, passwordless OTP authentication, and real-time voice synthesis via ElevenLabs.'
-                : 'Galardonado con Mención Honorífica (4to lugar) en MLH. Plataforma de benchmarking energético local para modelos abiertos (Gemma 4) con extracción estructurada vía Firecrawl, autenticación OTP y síntesis de voz con ElevenLabs.',
-            projectUrl: 'https://github.com/ElorichV/hacktoberfest2026',
-            architectureDiagramUrl: '/floorplans/benchengine.html',
-            category: 'Hackathons',
-            badge: '🏆 4to Lugar MLH Hackathon',
-            techStack: ['Ollama (Gemma 4)', 'Firecrawl', 'ElevenLabs', 'React', 'MojoAuth OTP'],
-            architectureNotes: isEn ? [
-                'Local vs Cloud Inference: Benchmarking Gemma 4 on Ollama to measure real energy consumption per token without network jitter.',
-                'Structured Web Ingestion: Integrated Firecrawl to transform raw technical documentation into clean evaluation contexts.',
-                'Security & Accessibility: Passwordless OTP authentication flow and auditory real-time telemetry via ElevenLabs API.'
-            ] : [
-                'Inferencia Local vs Cloud: Ejecución de Gemma 4 sobre Ollama para medir consumo energético real por token sin latencia de red.',
-                'Ingesta Web Estructurada: Integración de Firecrawl para transformar documentación técnica en contextos limpios de evaluación.',
-                'Accesibilidad & Seguridad: Flujo passwordless con MojoAuth OTP y telemetría auditiva en tiempo real vía ElevenLabs API.'
-            ]
-        },
-        {
-            id: 2,
-            title: isEn ? 'Voz Abierta — LSM 3D Real-Time Translator' : 'Voz Abierta — Traductor Bidireccional LSM 3D',
-            description: isEn
-                ? 'Prototype engineered for AI Hackathon Mexico × Clara. Real-time bi-directional translator between Mexican Sign Language (LSM) and Spanish using edge computer vision with MediaPipe, 3D avatar in Three.js, and Web Speech API.'
-                : 'Prototipo desarrollado para el AI Hackathon por México × Clara. Traductor en tiempo real entre Lengua de Señas Mexicana (LSM) y español utilizando visión computacional con MediaPipe, avatar 3D en Three.js y Web Speech API.',
-            projectUrl: 'https://github.com/ElorichV/Voz-abierta',
-            architectureDiagramUrl: '/floorplans/voz-abierta.html',
-            category: 'Hackathons',
-            badge: '🚀 AI Hackathon × Clara',
-            techStack: ['MediaPipe', 'Three.js', 'Web Speech API', 'React', 'TypeScript'],
-            architectureNotes: isEn ? [
-                'Edge Computer Vision: Hands and body pose extraction at 60 FPS in-browser with MediaPipe without sending raw video off-device.',
-                '3D Kinematic Engine: Skeletal interpolation in Three.js converting speech tokens to fluid LSM sign animations.',
-                'Civic Impact: Low-latency accessibility designed for government citizen desks and financial services.'
-            ] : [
-                'Visión Computacional Edge: Extracción de landmarks corporales y de manos a 60 FPS en el navegador con MediaPipe sin enviar video crudo a servidores externos.',
-                'Motor de Animación 3D: Interpolación cinemática en Three.js para traducir texto/voz a señas fluidas en un avatar tridimensional.',
-                'Impacto Cívico: Diseño de baja latencia pensado para inclusión en ventanillas de atención ciudadana y servicios financieros.'
-            ]
-        },
-        {
-            id: 3,
-            title: isEn ? 'Voice2Task — Native iOS Voice to GitHub Issues' : 'Voice2Task — Agente iOS Voz a GitHub Issues',
-            description: isEn
-                ? 'Native iOS app (SwiftUI + SwiftData) transcribing voice memos via SFSpeechRecognizer, parsing tasks with OpenAI (gpt-4o-mini structured JSON Schema), and synchronizing automatically with GitHub Issues.'
-                : 'Aplicación nativa iOS (SwiftUI + SwiftData) que transcribe notas de voz técnicas en tiempo real con SFSpeechRecognizer, extrae tareas estructuradas mediante OpenAI (gpt-4o-mini) y las sincroniza automáticamente con GitHub Issues.',
-            projectUrl: 'https://github.com/ElorichV/Voice2Task',
-            architectureDiagramUrl: '/floorplans/voice2task.html',
-            category: 'Hackathons',
-            badge: '📱 Native iOS + AI Agents',
-            techStack: ['SwiftUI', 'SwiftData', 'OpenAI API', 'SFSpeechRecognizer', 'GitHub REST API'],
-            architectureNotes: isEn ? [
-                'Local-First Persistence: Reactive SwiftData caching preventing audio and memo loss during connectivity dips.',
-                'Deterministic LLM Extraction: JSON Schema validation against gpt-4o-mini transforming free speech into acceptance criteria tickets.',
-                'Resilient API Sync: Direct GitHub REST integration handling exponential backoff and rate limits.'
-            ] : [
-                'Persistencia Local-First: Almacenamiento reactivo con SwiftData garantizando cero pérdida de notas de voz aún sin conexión.',
-                'Extracción Determinista con LLMs: Prompts estructurados (JSON Schema) sobre gpt-4o-mini para transformar audio libre en tickets con título, etiquetas y criterios de aceptación.',
-                'Sincronización Bidireccional: Integración directa con GitHub Issues API con manejo resiliente de reintentos y rate limits.'
-            ]
-        },
-        {
-            id: 4,
-            title: isEn ? 'Bakery Enterprise ERP / POS System' : 'Sistema ERP/POS de Gestión para Panaderías',
-            description: isEn
-                ? 'Full-Stack enterprise management platform designed under Clean Architecture with .NET 8 Web API, EF Core, and SQL Server. Multi-ingredient recipe stock control with ACID transactions and React 18 SPA.'
-                : 'Ecosistema empresarial Full-Stack diseñado bajo Clean Architecture con .NET 8 Web API, Entity Framework Core y SQL Server. Implementa control de inventario multi-ingrediente con transacciones ACID y cliente SPA en React 18.',
-            projectUrl: 'https://github.com/ElorichV/Sistema-de-gestion-para-panaderias',
-            architectureDiagramUrl: '/floorplans/panaderia-erp.html',
-            category: 'Backend',
-            badge: '🏛️ Clean Architecture & ACID',
-            techStack: ['.NET 8 Web API', 'C#', 'SQL Server', 'EF Core', 'Clean Architecture', 'React 18'],
-            architectureNotes: isEn ? [
-                'ACID Transactional Consistency: Explicit EF Core transactions deducting multi-batch ingredients atomically without race conditions.',
-                'Strict Layer Decoupling: Clear boundaries across Domain, Application, Infrastructure, and Presentation layers for frictionless unit testing.',
-                'SQL Query Optimization: Composite indexes that reduced report and sales query execution time by 30%.'
-            ] : [
-                'Consistencia Transaccional ACID: Uso de transacciones explícitas en EF Core para descontar insumos por receta y registrar ventas sin condiciones de carrera.',
-                'Desacoplamiento por Capas: Separación estricta entre Dominio, Aplicación, Infraestructura y Presentación facilitando pruebas unitarias.',
-                'Optimización SQL: Índices compuestos en SQL Server que redujeron el tiempo de consulta de reportes e inventario en un 30%.'
-            ]
-        },
-        {
-            id: 5,
-            title: isEn ? 'Cloud Engine & Portfolio Core (.NET 8 + AWS)' : 'Portafolio Cloud Engine & API Core (.NET 8 + AWS)',
-            description: isEn
-                ? 'Decoupled full-stack platform hosted on AWS (S3, CloudFront, Elastic Beanstalk). Backend built in .NET 8 with native IP rate limiting, CRLF injection sanitization, and standardized RFC 7807 responses.'
-                : 'Plataforma Full-Stack desacoplada desplegada sobre AWS (S3, CloudFront y Elastic Beanstalk). Backend en .NET 8 con Rate Limiting nativo por IP, sanitización AppSec contra inyección CRLF y respuestas estandarizadas RFC 7807.',
-            projectUrl: 'https://github.com/ElorichV/AxelLinaresApi',
-            architectureDiagramUrl: '/floorplans/portafolio-cloud.html',
-            category: 'Backend',
-            badge: '☁️ AWS S3 + CloudFront + .NET 8',
-            techStack: ['.NET 8', 'ASP.NET Core', 'AWS S3 & CloudFront', 'SQLite', 'RFC 7807', 'React + Vite'],
-            architectureNotes: isEn ? [
-                'Anti-Abuse Rate Limiting: FixedWindowRateLimiter partitioned by real client IP (X-Forwarded-For) returning HTTP 429 ProblemDetails.',
-                'SMTP AppSec Mitigation: Header sanitization stripping CRLF sequences to prevent header injection in email delivery pipelines.',
-                'Contract Verification CI: Automated parity tests ensuring zero schema drift between ES/EN locales.'
-            ] : [
-                'Resiliencia Anti-Spam (Rate Limiting): Middleware FixedWindowRateLimiter particionado por IP real (X-Forwarded-For) devolviendo HTTP 429 en formato RFC 7807.',
-                'Mitigación AppSec (CRLF Header Injection): Sanitización de entradas en el servicio de correo eliminando retornos de carro antes de entregarse a MailKit/SMTP.',
-                'CI Verification Gate: Pruebas unitarias de contrato (Node test runner) que validan paridad estricta entre diccionarios ES/EN.'
-            ]
-        },
-        {
-            id: 6,
-            title: isEn ? 'E2E Test Automation Suite & POM Framework (PINBOX)' : 'E2E Test Automation Suite & POM Framework (PINBOX)',
-            description: isEn
-                ? 'Black-box and regression testing architecture for Section Amarilla ADN portal using C#, Playwright, and Page Object Model (POM). Reduced QA regression cycle time by 40%.'
-                : 'Suite integral de automatización E2E y pruebas de regresión para el portal comercial PINBOX (Sección Amarilla ADN) utilizando C#, .NET y Playwright bajo el patrón Page Object Model (POM). Redujo los tiempos de regresión en un 40%.',
-            projectUrl: 'https://github.com/ElorichV/Playwrigt_Demo',
-            architectureDiagramUrl: '/floorplans/pinbox-e2e.html',
-            category: 'QA',
-            badge: '🛡️ Playwright + C# POM',
-            techStack: ['Playwright', 'C#', '.NET', 'Page Object Model', 'NUnit', 'Shift-Left'],
-            architectureNotes: isEn ? [
-                'Strict POM Encapsulation: Locators and user actions isolated in reusable Page Objects preventing selector drift.',
-                'Zero Flakiness Invariant: Custom web-first assertions and auto-waiting replacing hard sleeps completely.',
-                'Trace & Video Artifacts: Automated Playwright trace harvesting upon test failure for immediate defect triage.'
-            ] : [
-                'Desacoplamiento Estricto con POM: Encapsulación de locators y flujos de usuario en clases dedicadas eliminando fragilidad ante cambios de UI.',
-                'Invariante Cero Sleeps: Uso exclusivo de auto-waiting y Web-First Assertions de Playwright garantizando determinismo absoluto.',
-                'Evidencia Automatizada de Regresiones: Captura sistemática de traces y capturas en fallos facilitando triage en Jira.'
-            ]
-        },
-        {
-            id: 7,
-            title: 'TaskMaster API — Modern CFML Showcase',
-            description: isEn
-                ? 'Modern ColdFusion / CFML enterprise task and project microservice running on Lucee / CommandBox with clean REST routing and SQL Server persistence.'
-                : 'Microservicio empresarial en CFML moderno (Lucee / CommandBox) para gestión distribuida de tareas, demostrando modernización de sistemas legacy con arquitectura REST y SQL Server.',
-            projectUrl: 'https://github.com/ElorichV/TaskMaster-API-Modern-CFML-Showcase',
-            architectureDiagramUrl: null,
-            category: 'Backend',
-            badge: '⚡ Modern CFML + REST',
-            techStack: ['CFML', 'Lucee', 'CommandBox', 'REST API', 'SQL Server'],
-            architectureNotes: isEn ? [
-                'Legacy Modernization: Transforming script-heavy ColdFusion into modular MVC REST handlers.',
-                'SQL Transaction Isolation: Clean parameterized queries mitigating injection risks.'
-            ] : [
-                'Modernización Legacy: Migración de patrones CFML procedurales a controladores REST desacoplados.',
-                'Seguridad Parametrizada: Consultas SQL con binding estricto mitigando inyección SQL.'
-            ]
-        },
-        {
-            id: 8,
-            title: isEn ? 'DSA Competency & Learning Codebase' : 'Códigos de Aprendizaje y Competencia (DSA)',
-            description: isEn
-                ? 'Exhaustive repository containing advanced data structures, graph traversal algorithms, dynamic programming, and complexity benchmarks in C++ and Python.'
-                : 'Repositorio de dominio técnico exhaustivo conteniendo algoritmos clásicos y de competencia (árboles, grafos, memoización y ordenamiento) implementados en C++ y Python.',
-            projectUrl: 'https://github.com/ElorichV/Codigos-de-aprendizaje-y-competencia',
-            architectureDiagramUrl: null,
-            category: 'QA',
-            badge: '🧠 C++ & Python DSA',
-            techStack: ['C++', 'Python', 'Algorithms', 'Big-O', 'Data Structures'],
-            architectureNotes: isEn ? [
-                'Algorithmic Complexity: Focus on optimal O(N log N) space and time efficiency.',
-                'Pointers & Memory: Strict memory management in modern C++ standard.'
-            ] : [
-                'Optimización Asintótica: Implementaciones con foco en complejidad temporal y espacial óptima.',
-                'Gestión de Memoria en C++: Uso de punteros inteligentes y estructuras sin fugas.'
-            ]
-        },
-        {
-            id: 9,
-            title: isEn ? 'Enterprise Billing & Payroll Core System' : 'Sistema de Facturación y Nómina Empresarial',
-            description: isEn
-                ? 'Comprehensive client-server payroll and inventory system engineered with C#, .NET Framework, Windows Forms, and SQL Server with transactional reporting.'
-                : 'Sistema empresarial integral cliente-servidor desarrollado en C# y .NET Framework para la gestión transaccional de nómina, control de asistencias y timbrado fiscal.',
-            projectUrl: 'https://github.com/ElorichV/Sistema-de-Facturacion-y-Ventas',
-            architectureDiagramUrl: null,
-            category: 'Backend',
-            badge: '💼 Enterprise .NET + SQL',
-            techStack: ['C#', '.NET Framework', 'Windows Forms', 'SQL Server', 'Crystal Reports'],
-            architectureNotes: isEn ? [
-                'Stored Procedure Optimization: Complex query refactoring reducing calculation delays by 30%.',
-                'Transactional Audit Logging: Immutable database logs tracking financial records.'
-            ] : [
-                'Optimización de Stored Procedures: Refactorización de queries complejas que aceleró el cálculo de nómina en un 30%.',
-                'Bitácora Transaccional Inmutable: Registro de auditoría para operaciones críticas de tesorería.'
-            ]
-        }
-    ];
+    const fallbackProjects: ProjectItem[] = buildFallbackProjects(isEn);
 
     const allProjects = projects && projects.length > 0 ? projects : fallbackProjects;
 
@@ -271,10 +88,10 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
                 image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop'
             };
         }
-        if (title.includes('panader') || title.includes('bakery')) {
+        if (title.includes('panader') || title.includes('bakery') || title.includes('tahona')) {
             return {
                 icon: <Database className="w-4 h-4 text-amber-400" />,
-                image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop'
+                image: '/tahona-db-hero.jpg'
             };
         }
         if (title.includes('portafolio') || title.includes('cloud engine')) {

@@ -35,10 +35,10 @@ const fallbackProfile: UserProfile = {
     name: 'Axel Linares',
     title: 'Software Engineer & QA Automation Architect',
     summary: 'Ingeniero de Software con 3 años de experiencia diseñando servicios Backend robustos (.NET/C#) y construyendo arquitecturas de automatización de pruebas (QA). Especializado en el desarrollo de APIs REST, optimización avanzada de bases de datos SQL y la creación de suites automatizadas End-to-End (E2E) mediante Playwright. Orientado a garantizar la alta disponibilidad, seguridad y escalabilidad en ecosistemas ágiles y despliegues nativos en la nube (AWS).',
-    email: 'axel.linares.dev@gmail.com',
+    email: 'axel.a.linares@gmail.com',
     phone: '+52 55 ...',
     location: 'Ciudad de México, México',
-    linkedInUrl: 'https://www.linkedin.com/in/axel-alberto-linares-lorrabaquio/',
+    linkedInUrl: 'https://www.linkedin.com/in/axel-alberto-linares-lorrabaquio-69a6b31b0',
     gitHubUrl: 'https://github.com/ElorichV',
     hardSkills: ['C#', '.NET 8', 'Playwright', 'SQL Server', 'AWS', 'Python', 'React', 'Clean Architecture'],
     softSkills: [
@@ -68,18 +68,38 @@ function App() {
             : 'https://axellinares-api-chh4h8bcg0gubgaa.westus2-01.azurewebsites.net/api/Profile';
 
         const apiUrl = `${baseUrl}?lang=${i18n.language}`;
+        const controller = new AbortController();
+        let retryTimer: ReturnType<typeof setTimeout> | undefined;
 
-        axios.get(apiUrl, { timeout: 3500 })
-            .then(response => {
+        const fetchProfileWithWarmupRetry = async (attempt = 1) => {
+            try {
+                const response = await axios.get(apiUrl, {
+                    timeout: 25000,
+                    signal: controller.signal
+                });
                 const data = Array.isArray(response.data) ? response.data[0] : response.data;
                 if (data && typeof data === 'object') {
                     setProfile(prev => ({ ...prev, ...data }));
                 }
-            })
-            .catch(err => {
-                // Modo resiliente offline: se mantiene el fallbackProfile completo y pulcro
-                console.info("Backend API en standby/offline, usando perfil local resiliente:", err.message);
-            });
+            } catch (err: unknown) {
+                if (controller.signal.aborted) return;
+                if (attempt < 2) {
+                    retryTimer = setTimeout(() => {
+                        void fetchProfileWithWarmupRetry(attempt + 1);
+                    }, 2500);
+                    return;
+                }
+                const message = err instanceof Error ? err.message : 'Unknown network error';
+                console.info("Backend API en standby/offline, usando perfil local resiliente:", message);
+            }
+        };
+
+        void fetchProfileWithWarmupRetry();
+
+        return () => {
+            controller.abort();
+            if (retryTimer) clearTimeout(retryTimer);
+        };
 
     }, [i18n.language]);
 

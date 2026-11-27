@@ -12,7 +12,7 @@ The frontend consumes an external .NET 8 Web API with two primary endpoints:
 * **Query Parameter:** `?lang=es` or `?lang=en` (supports real-time language switching).
 * **Environments:**
   * **Local:** `http://localhost:5139/api/Profile?lang={lang}`
-  * **Production (AWS):** `https://d1xk37jjpjmwph.cloudfront.net/api/Profile?lang={lang}`
+  * **Production (Azure App Service):** `https://axellinares-api-chh4h8bcg0gubgaa.westus2-01.azurewebsites.net/api/Profile?lang={lang}`
 * **Response DTO (`UserProfileDto`):**
   * `id`: `number`
   * `name`: `"AXEL ALBERTO LINARES LORRABAQUIO"`
@@ -56,7 +56,7 @@ Lovable should structure the data fetching with a **resilient client pattern**:
    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
    export const API_BASE = isLocal
      ? 'http://localhost:5139'
-     : 'https://d1xk37jjpjmwph.cloudfront.net';
+     : 'https://axellinares-api-chh4h8bcg0gubgaa.westus2-01.azurewebsites.net';
    ```
 
 ---
