@@ -20,6 +20,7 @@ export function buildFallbackProjects(isEn: boolean): FallbackProjectItem[] {
                 ? 'Awarded Honorable Mention (4th Place) at MLH Hackathon. Local energy benchmarking platform for open LLMs (Gemma 4) with structured Firecrawl extraction, passwordless OTP authentication, and real-time voice synthesis via ElevenLabs.'
                 : 'Galardonado con Mención Honorífica (4to lugar) en MLH. Plataforma de benchmarking energético local para modelos abiertos (Gemma 4) con extracción estructurada vía Firecrawl, autenticación OTP y síntesis de voz con ElevenLabs.',
             projectUrl: 'https://github.com/ElorichV/hacktoberfest2026',
+            imageUrl: '/benchengine-hero.png',
             architectureDiagramUrl: '/floorplans/benchengine.html',
             category: 'Hackathons',
             badge: isEn ? '🏆 4th Place MLH Hackathon' : '🏆 4to Lugar MLH Hackathon',
@@ -41,6 +42,7 @@ export function buildFallbackProjects(isEn: boolean): FallbackProjectItem[] {
                 ? 'Prototype engineered for AI Hackathon Mexico × Clara. Real-time bi-directional translator between Mexican Sign Language (LSM) and Spanish using edge computer vision with MediaPipe, 3D avatar in Three.js, and Web Speech API.'
                 : 'Prototipo desarrollado para el AI Hackathon por México × Clara. Traductor en tiempo real entre Lengua de Señas Mexicana (LSM) y español utilizando visión computacional con MediaPipe, avatar 3D en Three.js y Web Speech API.',
             projectUrl: 'https://github.com/ElorichV/Voz-abierta',
+            imageUrl: '/voz-abierta-hero.png',
             architectureDiagramUrl: '/floorplans/voz-abierta.html',
             category: 'Hackathons',
             badge: '🚀 AI Hackathon × Clara',
@@ -83,7 +85,7 @@ export function buildFallbackProjects(isEn: boolean): FallbackProjectItem[] {
                 ? 'Database engineering & ERP platform under .NET 8 Clean Architecture, EF Core, and SQL Server (15 tables in 3NF, 63,500+ rows across 3 years, covering indexes, ACID transactions) paired with a React 18 + WebGL observability console.'
                 : 'Plataforma de ingeniería de base de datos y ERP bajo Clean Architecture (.NET 8, EF Core y SQL Server: 15 tablas en 3FN, +63,500 registros de 3 años, índices cubrientes y transacciones ACID) con consola React 18 + WebGL.',
             projectUrl: 'https://github.com/ElorichV/Sistema-de-gestion-para-panaderias',
-            imageUrl: '/tahona-db-hero.jpg',
+            imageUrl: '/panaderia-erp-hero.png',
             architectureDiagramUrl: '/floorplans/panaderia-erp.html',
             category: 'Backend',
             badge: isEn ? '🏛️ 15 Tables 3NF & ACID' : '🏛️ 15 Tablas 3FN & ACID',

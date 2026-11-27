@@ -73,13 +73,19 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
         if (title.includes('benchengine') || title.includes('greengemma')) {
             return {
                 icon: <Sparkles className="w-4 h-4 text-amber-400" />,
-                image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop'
+                image: '/benchengine-hero.png'
             };
         }
         if (title.includes('voz abierta')) {
             return {
                 icon: <Bot className="w-4 h-4 text-red-400" />,
-                image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=800&auto=format&fit=crop'
+                image: '/voz-abierta-hero.png'
+            };
+        }
+        if (title.includes('poke') || title.includes('dnd') || title.includes('d&d')) {
+            return {
+                icon: <Sparkles className="w-4 h-4 text-purple-400" />,
+                image: '/pokednd-hero.png'
             };
         }
         if (title.includes('voice2task')) {
@@ -91,7 +97,7 @@ const Projects: React.FC<ProjectsProps> = ({ projects = [] }) => {
         if (title.includes('panader') || title.includes('bakery') || title.includes('tahona')) {
             return {
                 icon: <Database className="w-4 h-4 text-amber-400" />,
-                image: '/tahona-db-hero.jpg'
+                image: '/panaderia-erp-hero.png'
             };
         }
         if (title.includes('portafolio') || title.includes('cloud engine')) {
